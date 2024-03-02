@@ -131,6 +131,10 @@ fun RecipeList(recipes: List<Recipe>) {
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_5)))
             }
             RecipeItem(recipe = recipes[index])
+
+            if (index == recipes.size - 1) {
+                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
+            }
         }
     }
 }

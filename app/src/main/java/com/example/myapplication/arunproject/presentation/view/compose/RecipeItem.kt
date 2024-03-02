@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -33,8 +34,9 @@ import com.example.myapplication.arunproject.data.model.Recipe
 @Composable
 fun RecipeItem(recipe: Recipe) {
     Card(
+        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
         elevation = CardDefaults.cardElevation(),
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_8)),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_12)),
         modifier = Modifier
             .fillMaxWidth()
             .padding(

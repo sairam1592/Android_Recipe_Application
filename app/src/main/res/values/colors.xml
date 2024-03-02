@@ -11,4 +11,5 @@
     <color name="blue_primary">#2985B9</color>
     <color name="blue_primary_dark">#3399D3</color>
     <color name="blue_accent">#78AFCF</color>
+    <color name="blue_light">#C5F1F5</color>
 </resources>
