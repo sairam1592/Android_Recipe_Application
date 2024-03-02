@@ -1,6 +1,7 @@
 package com.example.myapplication.arunproject.common
 
 object AppConstants {
+    const val DATE_FORMAT = "dd MMM yyyy"
     const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
     const val ERROR_MESSAGE = "An error occurred, please try again later."
     const val ERROR_API_FAILED = "Failed to fetch recipes, please try again later."

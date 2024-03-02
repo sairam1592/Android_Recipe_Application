@@ -18,20 +18,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.arun.myapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
+/**
+ * RecipeItem composable is used to display the recipe item in the list
+ * @param recipe: Recipe
+ */
 @Composable
 fun RecipeItem(recipe: Recipe) {
     Card(
         elevation = CardDefaults.cardElevation(),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_8)),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
+            .padding(
+                start = dimensionResource(id = R.dimen.padding_20),
+                end = dimensionResource(id = R.dimen.padding_20),
+                top = dimensionResource(id = R.dimen.padding_10),
+                bottom = dimensionResource(id = R.dimen.padding_10)
+            )
     ) {
 
         Column {
@@ -57,15 +68,19 @@ fun RecipeItem(recipe: Recipe) {
                 )
             }
 
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_16)))
 
             Text(
                 text = recipe.name,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    fontSize = 16.sp
+                    fontSize = dimensionResource(id = R.dimen.text_size).value.sp
                 ),
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 5.dp),
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.padding_16),
+                    end = dimensionResource(id = R.dimen.padding_16),
+                    top = dimensionResource(id = R.dimen.padding_2)
+                ),
                 color = Color.Black
             )
 
@@ -73,7 +88,11 @@ fun RecipeItem(recipe: Recipe) {
                 text = recipe.headline,
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
-                modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 5.dp)
+                modifier = Modifier.padding(
+                    start = dimensionResource(id = R.dimen.padding_16),
+                    end = dimensionResource(id = R.dimen.padding_16),
+                    bottom = dimensionResource(id = R.dimen.padding_5)
+                )
             )
         }
     }
