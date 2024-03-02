@@ -34,6 +34,12 @@ The project is built with the latest tools and libraries in the Android ecosyste
 - **AndroidX & Material Components**: For the latest UI components that adhere to Material Design principles.
 - **Coroutines**: To handle asynchronous tasks and provide a smooth user experience.
 
+## Upcoming Additions:
+- A lot of Jetpack design implementation
+- Room DB for caching
+- More features such as Recipe Detail screen, Difficulty level of recipe, Refer to youtube link, Select/Unselect a Recipe, Multiple Select/Unselect just like in other food apps
+- Unit Testing using Junit5 and Mockk
+
 ## Building the Project
 
 To build this project, clone the repo and import it into Android Studio. Make sure you have the latest version of Android Studio and the Kotlin plugin installed.
