@@ -12,6 +12,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -22,6 +24,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
     @Singleton
@@ -53,7 +58,10 @@ class AppModule {
     }
 
     @Provides
-    fun provideRecipeViewModel(getRecipesUseCase: GetRecipesUseCase): RecipeViewModel {
-        return RecipeViewModel(getRecipesUseCase)
+    fun provideRecipeViewModel(
+        getRecipesUseCase: GetRecipesUseCase,
+        ioDispatcher: CoroutineDispatcher
+    ): RecipeViewModel {
+        return RecipeViewModel(getRecipesUseCase, ioDispatcher)
     }
 }

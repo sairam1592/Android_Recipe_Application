@@ -1,14 +1,30 @@
 package com.example.myapplication.arunproject.data.model
 
-/* This is a data class that represents a recipe.
-    @param id The id of the recipe.
-    @param name The name of the recipe.
-    @param description The description of the recipe.
-    @param imageUrl The image url of the recipe.
+/* Recipe model
+    * @param calories: String
+    * @param carbos: String
+    * @param description: String
+    * @param difficulty: Int
+    * @param fats: String
+    * @param headline: String
+    * @param id: String
+    * @param image: String
+    * @param name: String
+    * @param proteins: String
+    * @param thumb: String
+    * @param time: String
  */
 data class Recipe(
-    val id: Int,
-    val name: String,
+    val calories: String,
+    val carbos: String,
     val description: String,
-    val imageUrl: String
+    val difficulty: Int,
+    val fats: String,
+    val headline: String,
+    val id: String,
+    val image: String,
+    val name: String,
+    val proteins: String,
+    val thumb: String,
+    val time: String
 )
