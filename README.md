@@ -17,6 +17,10 @@ This app has been meticulously crafted to demonstrate the full spectrum of my de
 ## Screenshots
 <img width="323" alt="Screenshot 2024-03-02 at 7 53 25 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/19ed87ad-8319-450d-8681-5cab8253ccc3">
 
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/ca5e2814-f89c-403c-ad1c-6ef0359e1ec3
+
+
 ## Technologies & Libraries
 
 The project is built with the latest tools and libraries in the Android ecosystem:
