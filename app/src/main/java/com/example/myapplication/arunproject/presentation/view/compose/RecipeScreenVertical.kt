@@ -130,11 +130,11 @@ fun RecipeScreenVertical(
                                 filteredRecipes,
                                 isShowGrid = isShowGrid,
                                 isShowAdaptiveGrid,
-                                onRecipeClick = { recipeId ->
+                                onRecipeClick = { newRecipeId ->
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected(
-                                        recipeId
+                                    recipeViewModel.onRecipeSelected( selectedIdFromState = selectedRecipeId,
+                                        newRecipeId
                                     )
 
                                 }, selectedRecipeId = selectedRecipeId.toString()
@@ -144,11 +144,11 @@ fun RecipeScreenVertical(
                                 recipes,
                                 isShowGrid = isShowGrid,
                                 isShowAdaptiveGrid,
-                                onRecipeClick = { recipeId ->
+                                onRecipeClick = { newRecipeId ->
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected(
-                                        recipeId
+                                    recipeViewModel.onRecipeSelected(selectedIdFromState =  selectedRecipeId,
+                                        newRecipeId
                                     )
                                 }, selectedRecipeId = selectedRecipeId.toString()
                             )

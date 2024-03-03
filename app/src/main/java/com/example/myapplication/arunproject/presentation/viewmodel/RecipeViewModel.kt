@@ -60,11 +60,12 @@ class RecipeViewModel @Inject constructor(
      * This function selects a recipe.
      * @param recipeId The ID of the recipe to be selected.
      */
-    fun onRecipeSelected(recipeId: String) {
-        // Set the selected recipe ID in your state
+    fun onRecipeSelected(selectedIdFromState: String?, recipeId: String) {
         val currentState = _recipeState.value
+
         if (currentState is RecipeViewState.Success) {
-            _recipeState.value = currentState.copy(selectedRecipeId = recipeId)
+            _recipeState.value =
+                currentState.copy(selectedRecipeId = if (selectedIdFromState == recipeId) null else recipeId)
         }
     }
 
