@@ -22,8 +22,7 @@ import javax.inject.Inject
 class RecipeViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase,
     private val ioDispatcher: CoroutineDispatcher
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private val _recipeState = MutableStateFlow<RecipeViewState>(RecipeViewState.Loading)
     val recipeState: StateFlow<RecipeViewState> = _recipeState.asStateFlow()
@@ -48,6 +47,23 @@ class RecipeViewModel @Inject constructor(
             result.onFailure { error ->
                 _recipeState.value = RecipeViewState.Error(error.message ?: ERROR_MESSAGE)
             }
+        }
+    }
+
+    // Function to handle recipe selection
+    fun onRecipeSelected(recipeId: String) {
+        // Set the selected recipe ID in your state
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            _recipeState.value = currentState.copy(selectedRecipeId = recipeId)
+        }
+    }
+
+    // Function to clear the selected recipe ID
+    fun clearSelectedRecipeId() {
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            _recipeState.value = currentState.copy(selectedRecipeId = null)
         }
     }
 }

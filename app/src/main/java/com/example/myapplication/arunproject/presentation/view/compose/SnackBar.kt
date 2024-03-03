@@ -20,6 +20,22 @@ import com.example.myapplication.arunproject.common.AppConstants
 /**
  * ShowErrorSnackBarWithoutAction is used to show the error Snack bar without any action
  */
+
+@Composable
+fun ShowOnClickSnackBarWithoutAction(recipeName: String) {
+    val snackState = remember { SnackbarHostState() }
+    androidx.compose.material.SnackbarHost(hostState = snackState, Modifier, snackbar = {
+        SnackBar(
+            it,
+            backgroundColor = colorResource(id = R.color.blue_accent),
+            contentColor = colorResource(id = R.color.white)
+        )
+    })
+    LaunchedEffect(snackState) {
+        snackState.showSnackbar("$recipeName is clicked, great choice!")
+    }
+}
+
 @Composable
 fun ShowErrorSnackBarWithoutAction() {
     val snackState = remember { SnackbarHostState() }

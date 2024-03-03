@@ -34,7 +34,7 @@ import com.example.myapplication.arunproject.data.model.Recipe
  * @param recipe: Recipe
  */
 @Composable
-fun RecipeItem(recipe: Recipe) {
+fun RecipeItem(recipe: Recipe, onClick: (String) -> Unit) {
     Card(
         colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
         elevation = CardDefaults.cardElevation(),
@@ -46,9 +46,9 @@ fun RecipeItem(recipe: Recipe) {
                 end = dimensionResource(id = R.dimen.padding_20),
                 top = dimensionResource(id = R.dimen.padding_10),
                 bottom = dimensionResource(id = R.dimen.padding_10)
-            )
+            ),
+        onClick = { onClick(recipe.id) }
     ) {
-
         Column {
             if (recipe.image.isEmpty()) {
                 Image(
@@ -122,5 +122,5 @@ fun PreviewRecipeItem() {
         thumb = "",
         time = "30 min"
     )
-    RecipeItem(recipe = dummyRecipe)
+    RecipeItem(recipe = dummyRecipe, onClick = {})
 }
