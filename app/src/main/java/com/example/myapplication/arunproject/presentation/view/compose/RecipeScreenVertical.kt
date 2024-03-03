@@ -50,6 +50,7 @@ fun RecipeScreenVertical(
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val recipesState by recipeViewModel.recipeState.collectAsStateWithLifecycle()
+
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
     val searchQuery = rememberSaveable { mutableStateOf("") }
@@ -120,7 +121,9 @@ fun RecipeScreenVertical(
 
                     is RecipeViewState.Error -> {
                         val errorMessage = (recipesState as RecipeViewState.Error).message
-                        ErrorScreen()
+                        ErrorScreen(onRetry = {
+                            recipeViewModel.loadRecipes()
+                        })
 
                         Column {
                             Row(

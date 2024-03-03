@@ -2,7 +2,7 @@ package com.example.myapplication.arunproject.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.arunproject.common.AppConstants.ERROR_MESSAGE
+import com.example.myapplication.arunproject.common.AppConstants.NO_INTERNET_ERROR_MESSAGE
 import com.example.myapplication.arunproject.domain.model.DataResult
 import com.example.myapplication.arunproject.domain.usecase.GetRecipesUseCase
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
@@ -31,7 +31,7 @@ class RecipeViewModel @Inject constructor(
         loadRecipes()
     }
 
-    private fun loadRecipes() {
+    fun loadRecipes() {
         viewModelScope.launch(ioDispatcher) {
             _recipeState.value = RecipeViewState.Loading
             val result = runCatching { getRecipesUseCase() }
@@ -41,11 +41,14 @@ class RecipeViewModel @Inject constructor(
                         RecipeViewState.Success(dataResult.data)
 
                     is DataResult.Error -> _recipeState.value =
-                        RecipeViewState.Error(dataResult.exception.message ?: ERROR_MESSAGE)
+                        RecipeViewState.Error(
+                            dataResult.exception.message ?: NO_INTERNET_ERROR_MESSAGE
+                        )
                 }
             }
             result.onFailure { error ->
-                _recipeState.value = RecipeViewState.Error(error.message ?: ERROR_MESSAGE)
+                _recipeState.value =
+                    RecipeViewState.Error(error.message ?: NO_INTERNET_ERROR_MESSAGE)
             }
         }
     }
