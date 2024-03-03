@@ -1,6 +1,7 @@
 package com.example.myapplication.arunproject.presentation.view.compose.recipeitem
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -27,16 +28,20 @@ import com.arun.myapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
 @Composable
-fun RecipeItemGrid(recipe: Recipe, onClick: (String) -> Unit) {
+fun RecipeItemGrid(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolean) {
+
     Column(modifier = Modifier.fillMaxSize()) {
         Card(
             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
+            border = if (isSelected) BorderStroke(
+                dimensionResource(id = R.dimen.padding_8),
+                colorResource(id = R.color.blue_primary)
+            ) else null,
             elevation = CardDefaults.cardElevation(),
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_8)),
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_8))
-                .aspectRatio(1f)
-            , onClick = { onClick(recipe.id) }
+                .aspectRatio(1f), onClick = { onClick(recipe.id) }
         ) {
             Image(
                 painter = if (recipe.image.isEmpty()) {
@@ -90,5 +95,5 @@ fun PreviewRecipeItemGrid() {
         thumb = "",
         time = "30 min"
     )
-    RecipeItemGrid(recipe = dummyRecipe, onClick = { })
+    RecipeItemGrid(recipe = dummyRecipe, onClick = { }, isSelected = false)
 }

@@ -34,9 +34,16 @@ import com.example.myapplication.arunproject.data.model.Recipe
  * @param recipe: Recipe
  */
 @Composable
-fun RecipeItem(recipe: Recipe, onClick: (String) -> Unit) {
+fun RecipeItem(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolean) {
+
+    val backgroundColor = if (isSelected) {
+        colorResource(id = R.color.blue_primary)
+    } else {
+        colorResource(id = R.color.blue_light)
+    }
+
     Card(
-        colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
+        colors = CardDefaults.cardColors(containerColor = backgroundColor),
         elevation = CardDefaults.cardElevation(),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_12)),
         modifier = Modifier
@@ -122,5 +129,5 @@ fun PreviewRecipeItem() {
         thumb = "",
         time = "30 min"
     )
-    RecipeItem(recipe = dummyRecipe, onClick = {})
+    RecipeItem(recipe = dummyRecipe, onClick = {}, isSelected = false)
 }

@@ -30,6 +30,7 @@ fun RecipeList(
     recipes: List<Recipe>,
     isShowGrid: Boolean = false,
     isShowGridAdaptive: Boolean = false,
+    selectedRecipeId: String,
     onRecipeClick: (String) -> Unit
 ) {
     if (isShowGrid) {
@@ -45,8 +46,11 @@ fun RecipeList(
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
                 }
-                RecipeItemGrid(recipe = recipes[index],
-                    onClick = { recipeId -> onRecipeClick(recipeId) })
+                RecipeItemGrid(
+                    recipe = recipes[index],
+                    onClick = { recipeId -> onRecipeClick(recipeId) },
+                    isSelected = recipes[index].id == selectedRecipeId
+                )
 
                 if (index == recipes.size - 1) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
@@ -65,8 +69,11 @@ fun RecipeList(
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
                 }
-                RecipeItemGrid(recipe = recipes[index],
-                    onClick = { recipeId -> onRecipeClick(recipeId) })
+                RecipeItemGrid(
+                    recipe = recipes[index],
+                    onClick = { recipeId -> onRecipeClick(recipeId) },
+                    isSelected = recipes[index].id == selectedRecipeId
+                )
 
                 if (index == recipes.size - 1) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
@@ -96,8 +103,11 @@ fun RecipeList(
                 if (index > 0) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
                 }
-                RecipeItem(recipe = recipes[index],
-                    onClick = { recipeId -> onRecipeClick(recipeId) })
+                RecipeItem(
+                    recipe = recipes[index],
+                    onClick = { recipeId -> onRecipeClick(recipeId) },
+                    isSelected = recipes[index].id == selectedRecipeId
+                )
 
                 if (index == recipes.size - 1) {
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
