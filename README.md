@@ -32,7 +32,11 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 
 ## Screenshots
 
+** VERTICAL LIST OF RECIPE CARDS
+
 <img width="323" alt="Screenshot 2024-03-02 at 7 53 25 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/19ed87ad-8319-450d-8681-5cab8253ccc3">
+
+** RECIPE CARDS IN GRID LAYOUT
 
 ![Screenshot 2024-03-03 at 12 28 15 PM](https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/b809df37-3aba-4fb7-8af1-3aad816492d0)
 
@@ -44,20 +48,25 @@ https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/ca5e281
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/a258da7c-5827-4080-a416-28f14caceaa0
 
-**MENU OPTION TO POPULATE EITHER AS A VERTICAL LIST OR GRID
+**MENU OPTION TO POPULATE EITHER AS A VERTICAL LIST OR GRID LIST
 
 <img width="273" alt="Screenshot 2024-03-03 at 6 33 22 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/9ec11efe-f140-493c-996c-2542799f5c42">
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/20978936-fd4f-49a5-b8b4-e994345ab9bf
 
-**A SIMPLE FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET
+**A FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/327035fb-f92b-40cd-9bae-92bbb3087435
 
-A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE
+**A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/4baca3a3-35c7-48fe-8bb2-75ad5d901829
 
+**NO INTERNET SCREEN AND RETRY BUTTON ADDED
+
+<img width="274" alt="Screenshot 2024-03-03 at 7 16 06 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/2c9df395-5d63-44c3-a1f2-4f75211e9cdf">
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/86ae988e-3b46-49ce-94ee-04965854882c
 
 
 ## Technologies & Libraries
