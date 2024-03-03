@@ -77,4 +77,15 @@ class RecipeViewModel @Inject constructor(
             _recipeState.value = currentState.copy(isShowGrid = isShowGrid)
         }
     }
+
+    /**
+     * This function searches the recipe.
+     * @param query The search query.
+     */
+    fun searchRecipe(query: String) {
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            _recipeState.value = currentState.copy(searchQuery = query)
+        }
+    }
 }

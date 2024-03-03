@@ -21,7 +21,11 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -48,6 +52,8 @@ fun RecipeScreenVertical(
     val recipesState by recipeViewModel.recipeState.collectAsStateWithLifecycle()
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+    val searchQuery = rememberSaveable { mutableStateOf("") }
+    var isSearchVisible by remember { mutableStateOf(false) }
 
     ModalBottomSheetLayout(
         sheetState = sheetState,
@@ -61,9 +67,18 @@ fun RecipeScreenVertical(
         }
     ) {
         Scaffold(scaffoldState = scaffoldState, topBar = {
-            RecipeAppBar(onMenuItemClick = { isShowGridList ->
-                recipeViewModel.showGridList(isShowGridList)
-            })
+            RecipeAppBar(
+                onMenuItemClick = { isShowGridList ->
+                    recipeViewModel.showGridList(isShowGridList)
+                },
+                searchQuery = searchQuery,
+                onSearchTextChange = {
+                    searchQuery.value = it
+                    recipeViewModel.searchRecipe(it)
+                },
+                isSearchVisible = isSearchVisible,
+                onSearchClicked = { isSearchVisible = true },
+                onSearchClose = { isSearchVisible = false })
         }, snackbarHost = {
             SnackbarHost(it) { data ->
                 ShowOnClickSnackBarWithoutAction(data.message)
@@ -78,10 +93,29 @@ fun RecipeScreenVertical(
                     is RecipeViewState.Success -> {
                         val recipes = (recipesState as RecipeViewState.Success).recipes
                         val isShowGrid = (recipesState as RecipeViewState.Success).isShowGrid
-                        RecipeList(recipes,
-                            isShowGrid = isShowGrid,
-                            isShowAdaptiveGrid,
-                            onRecipeClick = { recipeId -> recipeViewModel.onRecipeSelected(recipeId) })
+                        val searchQuery = (recipesState as RecipeViewState.Success).searchQuery
+
+                        if (searchQuery.isNotEmpty()) {
+                            val filteredRecipes =
+                                recipes.filter { it.name.contains(searchQuery, ignoreCase = true) }
+                            RecipeList(filteredRecipes,
+                                isShowGrid = isShowGrid,
+                                isShowAdaptiveGrid,
+                                onRecipeClick = { recipeId ->
+                                    recipeViewModel.onRecipeSelected(
+                                        recipeId
+                                    )
+                                })
+                        } else {
+                            RecipeList(recipes,
+                                isShowGrid = isShowGrid,
+                                isShowAdaptiveGrid,
+                                onRecipeClick = { recipeId ->
+                                    recipeViewModel.onRecipeSelected(
+                                        recipeId
+                                    )
+                                })
+                        }
                     }
 
                     is RecipeViewState.Error -> {
