@@ -1,5 +1,6 @@
-package com.example.myapplication.arunproject.presentation.view.compose
+package com.example.myapplication.arunproject.presentation.view.compose.recipeitem
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
@@ -98,4 +100,27 @@ fun RecipeItem(recipe: Recipe) {
             )
         }
     }
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+)
+@Composable
+fun PreviewRecipeItem() {
+    val dummyRecipe = Recipe(
+        calories = "200 kcal",
+        carbos = "20g",
+        description = "A delicious fish recipe",
+        difficulty = 1,
+        fats = "5g",
+        headline = "Tasty Fish",
+        id = "1",
+        image = "",
+        name = "Crispy Fish Goujons",
+        proteins = "10g",
+        thumb = "",
+        time = "30 min"
+    )
+    RecipeItem(recipe = dummyRecipe)
 }
