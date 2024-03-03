@@ -66,4 +66,15 @@ class RecipeViewModel @Inject constructor(
             _recipeState.value = currentState.copy(selectedRecipeId = null)
         }
     }
+
+    /**
+     * This function toggles the grid view.
+     * @param isShowGrid The flag to show grid view.
+     */
+    fun showGridList(isShowGrid: Boolean) {
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            _recipeState.value = currentState.copy(isShowGrid = isShowGrid)
+        }
+    }
 }
