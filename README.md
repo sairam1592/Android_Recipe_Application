@@ -44,6 +44,20 @@ https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/ca5e281
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/a258da7c-5827-4080-a416-28f14caceaa0
 
+**MENU OPTION TO POPULATE EITHER AS A VERTICAL LIST OR GRID
+
+<img width="273" alt="Screenshot 2024-03-03 at 6 33 22 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/9ec11efe-f140-493c-996c-2542799f5c42">
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/20978936-fd4f-49a5-b8b4-e994345ab9bf
+
+**A SIMPLE FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/327035fb-f92b-40cd-9bae-92bbb3087435
+
+A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/4baca3a3-35c7-48fe-8bb2-75ad5d901829
+
 
 
 ## Technologies & Libraries
