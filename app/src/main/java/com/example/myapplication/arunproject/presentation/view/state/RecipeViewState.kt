@@ -6,4 +6,8 @@ sealed class RecipeViewState {
     object Loading : RecipeViewState()
     data class Success(val recipes: List<Recipe>) : RecipeViewState()
     data class Error(val message: String) : RecipeViewState()
+
+    object selectedRecipeIds : RecipeViewState() {
+        val selectedRecipeIds: Set<Int> = emptySet()
+    }
 }

@@ -20,7 +20,7 @@ class RecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            RecipeScreenVertical(recipeViewModel = viewModel)
+            RecipeScreenVertical(recipeViewModel = viewModel, isShowGrid = true, isShowAdaptiveGrid = false)
         }
     }
 }
