@@ -31,6 +31,9 @@ class RecipeViewModel @Inject constructor(
         loadRecipes()
     }
 
+    /**
+     * This function fetches the recipes.
+     */
     fun loadRecipes() {
         viewModelScope.launch(ioDispatcher) {
             _recipeState.value = RecipeViewState.Loading
@@ -53,7 +56,10 @@ class RecipeViewModel @Inject constructor(
         }
     }
 
-    // Function to handle recipe selection
+    /**
+     * This function selects a recipe.
+     * @param recipeId The ID of the recipe to be selected.
+     */
     fun onRecipeSelected(recipeId: String) {
         // Set the selected recipe ID in your state
         val currentState = _recipeState.value
@@ -62,7 +68,33 @@ class RecipeViewModel @Inject constructor(
         }
     }
 
-    // Function to clear the selected recipe ID
+    /**
+     * This function adds a recipe to the cart.
+     * @param recipeId The ID of the recipe to be added.
+     */
+    fun addToCart(recipeId: String) {
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            val cart = currentState.cart.toMutableList()
+            cart.add(recipeId)
+            _recipeState.value = currentState.copy(cart = cart)
+        }
+    }
+
+    /**
+     * This function removes a recipe from the cart.
+     * @param recipeId The ID of the recipe to be removed.
+     */
+    fun clearCart() {
+        val currentState = _recipeState.value
+        if (currentState is RecipeViewState.Success) {
+            _recipeState.value = currentState.copy(cart = emptyList())
+        }
+    }
+
+    /**
+     * This function clears the selected recipe ID.
+     */
     fun clearSelectedRecipeId() {
         val currentState = _recipeState.value
         if (currentState is RecipeViewState.Success) {

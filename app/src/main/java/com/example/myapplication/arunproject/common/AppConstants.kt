@@ -2,12 +2,19 @@ package com.example.myapplication.arunproject.common
 
 object AppConstants {
     const val DATE_FORMAT = "dd MMM yyyy"
+
+    //API Constants
     const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
+    const val API_GET_PARAM =
+        "recipes.json" // This is the parameter for the API call, can be modified to test error response
+
+    //Error Messages
     const val NO_INTERNET_ERROR_MESSAGE = "Check your Internet Connection and try again."
     const val ERROR_API_FAILED = "Failed to fetch recipes, please try again later."
     const val RETRY = "Retry"
-    const val API_GET_PARAM =
-        "recipes.json" // This is the parameter for the API call, can be modified to test error response
+
+    const val CHOOSE_TEXT = "Choose a Recipe"
+    const val ADD_TO_CART = "Add To Cart"
 
     const val MY_INTRO =
         "Welcome to my Android app, i am Arun. I am building a simple recipe app. I hope you like it. " +

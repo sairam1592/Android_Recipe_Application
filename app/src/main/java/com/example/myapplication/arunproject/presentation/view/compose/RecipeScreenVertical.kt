@@ -3,17 +3,26 @@ package com.example.myapplication.arunproject.presentation.view.compose
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHost
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberModalBottomSheetState
@@ -31,9 +40,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.arun.myapplication.R
+import com.example.myapplication.arunproject.common.AppConstants
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipelist.RecipeList
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
@@ -94,28 +105,53 @@ fun RecipeScreenVertical(
                     is RecipeViewState.Success -> {
                         val recipes = (recipesState as RecipeViewState.Success).recipes
                         val isShowGrid = (recipesState as RecipeViewState.Success).isShowGrid
-                        val searchQuery = (recipesState as RecipeViewState.Success).searchQuery
+                        val searchText = (recipesState as RecipeViewState.Success).searchQuery
 
-                        if (searchQuery.isNotEmpty()) {
+                        val selectedRecipeId =
+                            (recipesState as RecipeViewState.Success).selectedRecipeId
+
+                        val recipeCart = (recipesState as RecipeViewState.Success).cart
+                        val selectedRecipeName =
+                            (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == recipeCart.firstOrNull() }?.name
+
+                        selectedRecipeName?.let { name ->
+                            LaunchedEffect(name) {
+                                scaffoldState.snackbarHostState.showSnackbar(
+                                    message = name,
+                                    duration = SnackbarDuration.Short
+                                )
+                            }
+                        }
+
+                        if (searchText.isNotEmpty()) {
                             val filteredRecipes =
-                                recipes.filter { it.name.contains(searchQuery, ignoreCase = true) }
-                            RecipeList(filteredRecipes,
+                                recipes.filter { it.name.contains(searchText, ignoreCase = true) }
+                            RecipeList(
+                                filteredRecipes,
                                 isShowGrid = isShowGrid,
                                 isShowAdaptiveGrid,
                                 onRecipeClick = { recipeId ->
+                                    recipeViewModel.clearSelectedRecipeId()
+                                    recipeViewModel.clearCart()
                                     recipeViewModel.onRecipeSelected(
                                         recipeId
                                     )
-                                })
+
+                                }, selectedRecipeId = selectedRecipeId.toString()
+                            )
                         } else {
-                            RecipeList(recipes,
+                            RecipeList(
+                                recipes,
                                 isShowGrid = isShowGrid,
                                 isShowAdaptiveGrid,
                                 onRecipeClick = { recipeId ->
+                                    recipeViewModel.clearSelectedRecipeId()
+                                    recipeViewModel.clearCart()
                                     recipeViewModel.onRecipeSelected(
                                         recipeId
                                     )
-                                })
+                                }, selectedRecipeId = selectedRecipeId.toString()
+                            )
                         }
                     }
 
@@ -136,24 +172,6 @@ fun RecipeScreenVertical(
                     }
                 }
             }
-
-            if (recipesState is RecipeViewState.Success) {
-                val selectedRecipeId = (recipesState as RecipeViewState.Success).selectedRecipeId
-                val selectedRecipeName =
-                    (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == selectedRecipeId }?.name
-
-                selectedRecipeName?.let { name ->
-
-                    LaunchedEffect(name) {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = name,
-                            duration = SnackbarDuration.Short
-                        )
-
-                        recipeViewModel.clearSelectedRecipeId()
-                    }
-                }
-            }
         }, floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = colorResource(id = R.color.blue_primary),
@@ -171,6 +189,55 @@ fun RecipeScreenVertical(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Add"
                 )
+            }
+        }, bottomBar = {
+            BottomAppBar(
+                elevation = dimensionResource(id = R.dimen.padding_10),
+                backgroundColor = colorResource(id = R.color.blue_accent),
+                contentPadding = PaddingValues(
+                    horizontal = dimensionResource(id = R.dimen.padding_5),
+                    vertical = dimensionResource(id = R.dimen.padding_5)
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(dimensionResource(id = R.dimen.padding_5)),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = AppConstants.CHOOSE_TEXT,
+                        color = colorResource(id = R.color.white),
+                        fontSize = dimensionResource(id = R.dimen.text_size).value.sp,
+                        fontFamily = MaterialTheme.typography.h6.fontFamily,
+                        fontWeight = androidx.compose.ui.text.font.FontWeight.Normal,
+                        modifier = Modifier
+                            .padding(
+                                start = dimensionResource(id = R.dimen.padding_16),
+                                end = dimensionResource(id = R.dimen.padding_5)
+                            )
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    Button(
+                        onClick = {
+                            (recipesState as RecipeViewState.Success).selectedRecipeId?.let {
+                                recipeViewModel.addToCart(it)
+                            }
+                        },
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .padding(dimensionResource(id = R.dimen.padding_4)),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.blue_primary))
+                    ) {
+                        Text(
+                            text = AppConstants.ADD_TO_CART,
+                            color = colorResource(id = R.color.white)
+                        )
+                    }
+                }
             }
         })
     }
@@ -198,8 +265,10 @@ fun PreviewRecipeList() {
             time = "30 min"
         )
     }
-    RecipeList(recipes = dummyRecipes,
+    RecipeList(
+        recipes = dummyRecipes,
         isShowGrid = false,
         isShowGridAdaptive = false,
-        onRecipeClick = {})
+        onRecipeClick = {}, selectedRecipeId = ""
+    )
 }
