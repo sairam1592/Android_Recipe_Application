@@ -23,6 +23,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Add Floating Action Button and onClick of it open a BottomSheet with my Intro;)
 - Show SnackBar on click of an Recipe
 - Show error Snackbar if App is opened when no internet available
+- Add No Internet Error screen with a Retry button to load recipe
 
 ## Upcoming Additions:
 - A lot of Jetpack design implementation
@@ -32,37 +33,37 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 
 ## Screenshots
 
-** VERTICAL LIST OF RECIPE CARDS
+**VERTICAL LIST OF RECIPE CARDS**
 
 <img width="323" alt="Screenshot 2024-03-02 at 7 53 25 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/19ed87ad-8319-450d-8681-5cab8253ccc3">
 
-** RECIPE CARDS IN GRID LAYOUT
+**RECIPE CARDS IN GRID LAYOUT**
 
 ![Screenshot 2024-03-03 at 12 28 15 PM](https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/b809df37-3aba-4fb7-8af1-3aad816492d0)
 
-**LIST POPULATED AS A SIMPLE VERTICAL SCROLL
+**LIST POPULATED AS A SIMPLE VERTICAL SCROLL**
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/ca5e2814-f89c-403c-ad1c-6ef0359e1ec3
 
-**LIST POPULATED AS A GRID
+**LIST POPULATED AS A GRID**
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/a258da7c-5827-4080-a416-28f14caceaa0
 
-**MENU OPTION TO POPULATE EITHER AS A VERTICAL LIST OR GRID LIST
+**MENU OPTION TO POPULATE EITHER AS A VERTICAL LIST OR GRID LIST**
 
 <img width="273" alt="Screenshot 2024-03-03 at 6 33 22 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/9ec11efe-f140-493c-996c-2542799f5c42">
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/20978936-fd4f-49a5-b8b4-e994345ab9bf
 
-**A FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET
+**A FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET**
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/327035fb-f92b-40cd-9bae-92bbb3087435
 
-**A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE
+**A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE**
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/4baca3a3-35c7-48fe-8bb2-75ad5d901829
 
-**NO INTERNET SCREEN AND RETRY BUTTON ADDED
+**NO INTERNET SCREEN AND RETRY BUTTON**
 
 <img width="274" alt="Screenshot 2024-03-03 at 7 16 06 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/2c9df395-5d63-44c3-a1f2-4f75211e9cdf">
 
