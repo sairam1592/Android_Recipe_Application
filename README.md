@@ -19,9 +19,9 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Leveraged Kotlin Coroutines, StateFlow for API and passing of data back to view
 - Used Jetpack Compose to Populate list of data into the composable UI screen
 - Make UI screen load both vertical and grid of recipe list
-- Added search functionality in AppBar
+- Added search functionality to search based on recipe name in AppBar
+- Enabe User to Add a recipe to Cart and show SnackBar once added to Cart
 - Added Floating Action Button and onClick of it open a BottomSheet with my Intro;)
-- Show SnackBar on click of an Recipe
 - Show error Snackbar if App is opened when no internet available
 - Added No Internet Error screen with a Retry button to load recipe
 
@@ -58,6 +58,11 @@ https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/2097893
 **A FLOATING ACTION BUTTON, ON CLICK OPEN A BOTTOMSHEET**
 
 https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/327035fb-f92b-40cd-9bae-92bbb3087435
+
+**ADD A RECIPE TO CART, AND SHOW SNACKBAR**
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/16b4d03b-ed02-405a-936c-cc0be39bc18d
+
 
 **A SEARCH FUNCTIONALITY TO SEARCH THE LIST OF RECIPES AVAILABLE**
 
