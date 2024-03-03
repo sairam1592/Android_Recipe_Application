@@ -15,15 +15,15 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - **State Management**: Reactive state management is implemented, ensuring that the UI is always in sync with the underlying data.
 
 ## Functionality
-- Fetch a list of Recipe from a WEB URL and show it in the UI
+- Fetch a list of Recipe from a WEB API and display it in the UI
 - Leveraged Kotlin Coroutines, StateFlow for API and passing of data back to view
 - Used Jetpack Compose to Populate list of data into the composable UI screen
-- This UI screen can load both a vertical list and also a grid of recipe
-- Add search functionality in AppBar
-- Add Floating Action Button and onClick of it open a BottomSheet with my Intro;)
+- Make UI screen load both vertical and grid of recipe list
+- Added search functionality in AppBar
+- Added Floating Action Button and onClick of it open a BottomSheet with my Intro;)
 - Show SnackBar on click of an Recipe
 - Show error Snackbar if App is opened when no internet available
-- Add No Internet Error screen with a Retry button to load recipe
+- Added No Internet Error screen with a Retry button to load recipe
 
 ## Upcoming Additions:
 - A lot of Jetpack design implementation
