@@ -81,7 +81,7 @@ fun RecipeAppBar(
                             keyboardController?.hide()
                         },
                     ),
-                    cursorBrush = SolidColor(colorResource(id = R.color.blue_primary)),
+                    cursorBrush = SolidColor(colorResource(id = R.color.white)),
                     textStyle = MaterialTheme.typography.body2.copy(color = colorResource(id = R.color.white)),
                     decorationBox = { innerTextField ->
                         TextFieldDefaults.TextFieldDecorationBox(
