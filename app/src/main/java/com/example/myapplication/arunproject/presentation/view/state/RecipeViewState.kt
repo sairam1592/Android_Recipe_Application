@@ -11,6 +11,7 @@ sealed class RecipeViewState {
         val recipes: List<Recipe>,
         val selectedRecipeId: String? = null,
         val isShowGrid: Boolean = false,
+        val searchQuery: String = ""
     ) : RecipeViewState()
 
     data class Error(val message: String) : RecipeViewState()

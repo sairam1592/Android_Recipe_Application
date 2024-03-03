@@ -2,4 +2,5 @@
     <string name="app_name">Recipe</string>
     <string name="menu_vertical_list">Load Vertical List</string>
     <string name="menu_grid_list">Load Grid List</string>
+    <string name="search_hint">Search</string>
 </resources>
