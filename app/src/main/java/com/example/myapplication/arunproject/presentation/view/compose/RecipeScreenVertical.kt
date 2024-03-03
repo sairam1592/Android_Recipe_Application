@@ -5,83 +5,130 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.ModalBottomSheetLayout
+import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHost
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.arun.myapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipelist.RecipeList
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
+import kotlinx.coroutines.launch
 
+@ExperimentalMaterialApi
 @Composable
 fun RecipeScreenVertical(
     recipeViewModel: RecipeViewModel = viewModel(), isShowGrid: Boolean, isShowAdaptiveGrid: Boolean
 ) {
+    val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val recipesState by recipeViewModel.recipeState.collectAsStateWithLifecycle()
     val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(scaffoldState = scaffoldState, snackbarHost = {
-        SnackbarHost(it) { data ->
-            ShowOnClickSnackBarWithoutAction(data.message)
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetShape = RoundedCornerShape(
+            topStart = dimensionResource(id = R.dimen.padding_16),
+            topEnd = dimensionResource(id = R.dimen.padding_16)
+        ),
+        sheetBackgroundColor = colorResource(id = R.color.blue_light),
+        sheetContent = {
+            BottomSheetContent()
         }
-    }, content = {
-        Box(modifier = Modifier.padding(it)) {
-            when (recipesState) {
-                is RecipeViewState.Loading -> {
-                    LoadingScreen()
-                }
+    ) {
+        Scaffold(scaffoldState = scaffoldState, snackbarHost = {
+            SnackbarHost(it) { data ->
+                ShowOnClickSnackBarWithoutAction(data.message)
+            }
+        }, content = {
+            Box(modifier = Modifier.padding(it)) {
+                when (recipesState) {
+                    is RecipeViewState.Loading -> {
+                        LoadingScreen()
+                    }
 
-                is RecipeViewState.Success -> {
-                    val recipes = (recipesState as RecipeViewState.Success).recipes
-                    RecipeList(recipes,
-                        isShowGrid,
-                        isShowAdaptiveGrid,
-                        onRecipeClick = { recipeId -> recipeViewModel.onRecipeSelected(recipeId) })
-                }
+                    is RecipeViewState.Success -> {
+                        val recipes = (recipesState as RecipeViewState.Success).recipes
+                        RecipeList(recipes,
+                            isShowGrid,
+                            isShowAdaptiveGrid,
+                            onRecipeClick = { recipeId -> recipeViewModel.onRecipeSelected(recipeId) })
+                    }
 
-                is RecipeViewState.Error -> {
-                    val errorMessage = (recipesState as RecipeViewState.Error).message
-                    ErrorScreen()
+                    is RecipeViewState.Error -> {
+                        val errorMessage = (recipesState as RecipeViewState.Error).message
+                        ErrorScreen()
 
-                    Column {
-                        Row(
-                            modifier = Modifier.weight(1f, fill = true),
-                            verticalAlignment = Alignment.Bottom
-                        ) {
-                            ShowErrorSnackBarWithoutAction()
+                        Column {
+                            Row(
+                                modifier = Modifier.weight(1f, fill = true),
+                                verticalAlignment = Alignment.Bottom
+                            ) {
+                                ShowErrorSnackBarWithoutAction()
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if (recipesState is RecipeViewState.Success) {
-            val selectedRecipeId = (recipesState as RecipeViewState.Success).selectedRecipeId
-            val selectedRecipeName =
-                (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == selectedRecipeId }?.name
+            if (recipesState is RecipeViewState.Success) {
+                val selectedRecipeId = (recipesState as RecipeViewState.Success).selectedRecipeId
+                val selectedRecipeName =
+                    (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == selectedRecipeId }?.name
 
-            selectedRecipeName?.let { name ->
+                selectedRecipeName?.let { name ->
 
-                LaunchedEffect(name) {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = name,
-                        duration = SnackbarDuration.Short
-                    )
+                    LaunchedEffect(name) {
+                        scaffoldState.snackbarHostState.showSnackbar(
+                            message = name,
+                            duration = SnackbarDuration.Short
+                        )
 
-                    recipeViewModel.clearSelectedRecipeId()
+                        recipeViewModel.clearSelectedRecipeId()
+                    }
                 }
             }
-        }
-    })
+        }, floatingActionButton = {
+            FloatingActionButton(
+                backgroundColor = colorResource(id = R.color.blue_primary),
+                onClick = {
+                    coroutineScope.launch {
+                        if (sheetState.isVisible) {
+                            sheetState.hide()
+                        } else {
+                            sheetState.show()
+                        }
+                    }
+                }) {
+                Icon(
+                    tint = colorResource(id = R.color.white),
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add"
+                )
+            }
+        })
+    }
 }
 
 @Preview(
