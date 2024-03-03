@@ -19,6 +19,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Leveraged Kotlin Coroutines, StateFlow for API and passing of data back to view
 - Used Jetpack Compose to Populate list of data into the composable UI screen
 - This UI screen can load both a vertical list and also a grid of recipe
+- Snow SnackBar on click of an Item
 
 ## Upcoming Additions:
 - A lot of Jetpack design implementation
