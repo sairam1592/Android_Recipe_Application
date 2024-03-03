@@ -36,10 +36,13 @@ import com.example.myapplication.arunproject.presentation.view.state.RecipeViewS
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * RecipeScreenVertical is used to show the recipe list in vertical list
+ */
 @ExperimentalMaterialApi
 @Composable
 fun RecipeScreenVertical(
-    recipeViewModel: RecipeViewModel = viewModel(), isShowGrid: Boolean, isShowAdaptiveGrid: Boolean
+    recipeViewModel: RecipeViewModel = viewModel(), isShowAdaptiveGrid: Boolean
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val recipesState by recipeViewModel.recipeState.collectAsStateWithLifecycle()
@@ -57,7 +60,11 @@ fun RecipeScreenVertical(
             BottomSheetContent()
         }
     ) {
-        Scaffold(scaffoldState = scaffoldState, snackbarHost = {
+        Scaffold(scaffoldState = scaffoldState, topBar = {
+            RecipeAppBar(onMenuItemClick = { isShowGridList ->
+                recipeViewModel.showGridList(isShowGridList)
+            })
+        }, snackbarHost = {
             SnackbarHost(it) { data ->
                 ShowOnClickSnackBarWithoutAction(data.message)
             }
@@ -70,8 +77,9 @@ fun RecipeScreenVertical(
 
                     is RecipeViewState.Success -> {
                         val recipes = (recipesState as RecipeViewState.Success).recipes
+                        val isShowGrid = (recipesState as RecipeViewState.Success).isShowGrid
                         RecipeList(recipes,
-                            isShowGrid,
+                            isShowGrid = isShowGrid,
                             isShowAdaptiveGrid,
                             onRecipeClick = { recipeId -> recipeViewModel.onRecipeSelected(recipeId) })
                     }

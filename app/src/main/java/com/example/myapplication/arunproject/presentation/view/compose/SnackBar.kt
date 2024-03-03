@@ -32,7 +32,7 @@ fun ShowOnClickSnackBarWithoutAction(recipeName: String) {
         )
     })
     LaunchedEffect(snackState) {
-        snackState.showSnackbar("$recipeName is clicked, great choice!")
+        snackState.showSnackbar("Wow $recipeName, Great Choice!")
     }
 }
 
