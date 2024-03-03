@@ -27,7 +27,7 @@ import com.arun.myapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
 @Composable
-fun RecipeItemGrid(recipe: Recipe) {
+fun RecipeItemGrid(recipe: Recipe, onClick: (String) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         Card(
             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
@@ -36,6 +36,7 @@ fun RecipeItemGrid(recipe: Recipe) {
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_8))
                 .aspectRatio(1f)
+            , onClick = { onClick(recipe.id) }
         ) {
             Image(
                 painter = if (recipe.image.isEmpty()) {
@@ -89,5 +90,5 @@ fun PreviewRecipeItemGrid() {
         thumb = "",
         time = "30 min"
     )
-    RecipeItemGrid(recipe = dummyRecipe)
+    RecipeItemGrid(recipe = dummyRecipe, onClick = { })
 }

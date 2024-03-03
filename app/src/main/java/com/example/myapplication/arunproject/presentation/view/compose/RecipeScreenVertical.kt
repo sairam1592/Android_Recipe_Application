@@ -3,49 +3,37 @@ package com.example.myapplication.arunproject.presentation.view.compose
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHost
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.arun.myapplication.R
-import com.example.myapplication.arunproject.common.AppConstants
-import com.example.myapplication.arunproject.common.getCurrentDate
 import com.example.myapplication.arunproject.data.model.Recipe
-import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItem
-import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemGrid
+import com.example.myapplication.arunproject.presentation.view.compose.recipelist.RecipeList
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
 
 @Composable
 fun RecipeScreenVertical(
-    recipeViewModel: RecipeViewModel = viewModel(),
-    isShowGrid: Boolean,
-    isShowAdaptiveGrid: Boolean
+    recipeViewModel: RecipeViewModel = viewModel(), isShowGrid: Boolean, isShowAdaptiveGrid: Boolean
 ) {
-    val recipesState by recipeViewModel.recipeState.collectAsState()
+    val recipesState by recipeViewModel.recipeState.collectAsStateWithLifecycle()
+    val scaffoldState = rememberScaffoldState()
 
-    Scaffold(content = {
+    Scaffold(scaffoldState = scaffoldState, snackbarHost = {
+        SnackbarHost(it) { data ->
+            ShowOnClickSnackBarWithoutAction(data.message)
+        }
+    }, content = {
         Box(modifier = Modifier.padding(it)) {
             when (recipesState) {
                 is RecipeViewState.Loading -> {
@@ -54,12 +42,15 @@ fun RecipeScreenVertical(
 
                 is RecipeViewState.Success -> {
                     val recipes = (recipesState as RecipeViewState.Success).recipes
-                    RecipeList(recipes, isShowGrid, isShowAdaptiveGrid)
+                    RecipeList(recipes,
+                        isShowGrid,
+                        isShowAdaptiveGrid,
+                        onRecipeClick = { recipeId -> recipeViewModel.onRecipeSelected(recipeId) })
                 }
 
                 is RecipeViewState.Error -> {
                     val errorMessage = (recipesState as RecipeViewState.Error).message
-                    ErrorScreen() // Show error screen
+                    ErrorScreen()
 
                     Column {
                         Row(
@@ -70,131 +61,27 @@ fun RecipeScreenVertical(
                         }
                     }
                 }
+            }
+        }
 
-                else -> {}
+        if (recipesState is RecipeViewState.Success) {
+            val selectedRecipeId = (recipesState as RecipeViewState.Success).selectedRecipeId
+            val selectedRecipeName =
+                (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == selectedRecipeId }?.name
+
+            selectedRecipeName?.let { name ->
+
+                LaunchedEffect(name) {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = name,
+                        duration = SnackbarDuration.Short
+                    )
+
+                    recipeViewModel.clearSelectedRecipeId()
+                }
             }
         }
     })
-}
-
-/**
- * Show loading screen
- */
-@Composable
-fun LoadingScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(dimensionResource(id = R.dimen.padding_20)),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator(color = colorResource(id = R.color.blue_primary))
-    }
-}
-
-/**
- * Show error screen
- */
-@Composable
-fun ErrorScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(dimensionResource(id = R.dimen.padding_16)),
-        contentAlignment = Alignment.Center
-    ) {
-        Column {
-            Text(
-                AppConstants.ERROR_MESSAGE,
-                color = Color.Red,
-                fontSize = dimensionResource(id = R.dimen.text_size_18).value.sp
-            )
-        }
-    }
-}
-
-/**
- * Show recipe list
- */
-@Composable
-fun RecipeList(
-    recipes: List<Recipe>,
-    isShowGrid: Boolean = false,
-    isShowGridAdaptive: Boolean = false
-) {
-    if (isShowGrid) {
-        val columns = 2
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns),
-            contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.padding_20)),
-            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_10))
-        ) {
-
-            items(recipes.size) { index ->
-                if (index > 0) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
-                }
-                RecipeItemGrid(recipe = recipes[index])
-
-                if (index == recipes.size - 1) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
-                }
-            }
-        }
-    } else if (isShowGridAdaptive) {
-        val minSize = 150.dp
-
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize),
-            contentPadding = PaddingValues(horizontal = dimensionResource(id = R.dimen.padding_20)),
-            modifier = Modifier.padding(vertical = dimensionResource(id = R.dimen.padding_10))
-        ) {
-            items(recipes.size) { index ->
-                if (index > 0) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
-                }
-                RecipeItemGrid(recipe = recipes[index])
-
-                if (index == recipes.size - 1) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_20)))
-                }
-            }
-        }
-    } else {
-        LazyColumn {
-
-            item {
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
-            }
-
-            item {
-                Text(
-                    text = getCurrentDate(),
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                        fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp
-                    ),
-                    modifier = Modifier.padding(
-                        start = dimensionResource(id = R.dimen.padding_20),
-                        end = dimensionResource(id = R.dimen.padding_20)
-                    ),
-                    color = colorResource(id = R.color.blue_primary)
-                )
-            }
-
-            items(recipes.size) { index ->
-                if (index > 0) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
-                }
-                RecipeItem(recipe = recipes[index])
-
-                if (index == recipes.size - 1) {
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
-                }
-            }
-        }
-    }
 }
 
 @Preview(
@@ -219,5 +106,8 @@ fun PreviewRecipeList() {
             time = "30 min"
         )
     }
-    RecipeList(recipes = dummyRecipes, isShowGrid = false, isShowGridAdaptive = false)
+    RecipeList(recipes = dummyRecipes,
+        isShowGrid = false,
+        isShowGridAdaptive = false,
+        onRecipeClick = {})
 }
