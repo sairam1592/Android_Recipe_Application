@@ -15,6 +15,8 @@ object AppConstants {
 
     const val CHOOSE_TEXT = "Choose a Recipe"
     const val ADD_TO_CART = "Add To Cart"
+    const val RECIPE_ROW = "Recipe Row"
+    const val RECIPE_COLUMN = "Recipe Column"
 
     const val MY_INTRO =
         "Welcome to my Android app, i am Arun. I am building this simple recipe app using" +

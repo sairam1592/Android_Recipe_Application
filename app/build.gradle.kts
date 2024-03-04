@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.arun.myapplication"
+    namespace = "com.arun.myrecipeapplication"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.arun.myapplication"
+        applicationId = "com.arun.myrecipeapplication"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

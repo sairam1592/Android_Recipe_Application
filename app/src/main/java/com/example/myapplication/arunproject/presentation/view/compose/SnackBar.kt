@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 
 /**

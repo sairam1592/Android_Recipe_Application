@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
 /**
@@ -85,7 +85,7 @@ fun RecipeItem(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolean) {
                 text = recipe.name,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    fontSize = dimensionResource(id = R.dimen.text_size_16).value.sp
+                    fontSize = dimensionResource(id = R.dimen.text_size_18).value.sp
                 ),
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.padding_16),
@@ -97,7 +97,7 @@ fun RecipeItem(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolean) {
 
             Text(
                 text = recipe.headline,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium.copy(fontSize = dimensionResource(id = R.dimen.text_size_16).value.sp),
                 color = Color.Gray,
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.padding_16),

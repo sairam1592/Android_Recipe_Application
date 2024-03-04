@@ -23,8 +23,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
 @Composable
@@ -60,7 +61,8 @@ fun RecipeItemGrid(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolea
         Text(
             text = recipe.name,
             style = MaterialTheme.typography.bodySmall.copy(
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontSize = dimensionResource(id = R.dimen.text_size_16).value.sp
             ),
             modifier = Modifier
                 .padding(
