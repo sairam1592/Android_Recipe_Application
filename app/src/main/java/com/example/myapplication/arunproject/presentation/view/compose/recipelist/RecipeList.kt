@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arun.myapplication.R
+import com.example.myapplication.arunproject.common.AppConstants
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItem
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemGrid
@@ -94,7 +95,7 @@ fun RecipeList(
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
 
                     Text(
-                        text = "Recipe Row",
+                        text = AppConstants.RECIPE_ROW,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
                             fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
@@ -127,7 +128,7 @@ fun RecipeList(
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
 
                     Text(
-                        text = "Recipe Vertical List",
+                        text = AppConstants.RECIPE_COLUMN,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
                             fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
