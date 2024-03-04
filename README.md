@@ -1,6 +1,6 @@
-# My Android Compose App
+# Recipe Realm Android App
 
-Welcome to the repository of my latest Android application, where modern design meets seamless functionality. This project is a testament to the best practices in software development, featuring Clean Code, Clean Architecture, and adherence to SOLID principles.
+Welcome to the repository of my latest Android application -> Recipe Realm, where modern design meets seamless functionality. This project is a testament to the best practices in software development, featuring Clean Code, Clean Architecture, and adherence to SOLID principles.
 
 ## About the Project
 
@@ -27,6 +27,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Added No Internet Error screen with a Retry button to load recipe
 
 ## Upcoming Additions:
+- Publishing to Google Play store -> Submitted release bundle for Review
 - A lot of Jetpack design implementation
 - Room DB for caching
 - More features such as Recipe Detail screen, Difficulty level of recipe, Refer to youtube link, Select/Unselect a Recipe, Multiple Select/Unselect just like in other food apps
