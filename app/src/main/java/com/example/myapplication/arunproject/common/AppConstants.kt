@@ -17,7 +17,7 @@ object AppConstants {
     const val ADD_TO_CART = "Add To Cart"
 
     const val MY_INTRO =
-        "Welcome to my Android app, i am Arun. I am building a simple recipe app using. " +
+        "Welcome to my Android app, i am Arun. I am building a simple recipe app using " +
                 "\n Kotlin, Jetpack Compose, Kotlin Coroutines, Hilt, Retrofit etc." +
                 "\n following the best practices and design patterns such as. " +
                 "MVVM, Clean Architecture, SOLID principles. " +
