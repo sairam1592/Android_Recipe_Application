@@ -40,7 +40,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 
 /**
  * RecipeAppBar is used to show the app bar with menu

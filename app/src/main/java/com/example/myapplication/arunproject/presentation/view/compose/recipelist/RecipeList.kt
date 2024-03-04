@@ -20,7 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItem

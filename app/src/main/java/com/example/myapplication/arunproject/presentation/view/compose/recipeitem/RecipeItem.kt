@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.data.model.Recipe
 
 /**

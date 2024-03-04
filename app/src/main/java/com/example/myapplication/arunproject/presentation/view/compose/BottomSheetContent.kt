@@ -12,7 +12,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.arun.myapplication.R
+import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 
 @Composable
