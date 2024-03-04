@@ -19,7 +19,7 @@ object AppConstants {
     const val RECIPE_COLUMN = "Recipe Column"
 
     const val MY_INTRO =
-        "Welcome to my Android app, i am Arun. I am building this simple recipe app using" +
+        "Welcome to Recipe Realm Android app. This recipe app is built using" +
                 " Kotlin, Jetpack Compose, Kotlin Coroutines, Hilt, Retrofit etc." +
                 " following the best practices and design patterns such as " +
                 " MVVM, Clean Architecture, SOLID principles." +
