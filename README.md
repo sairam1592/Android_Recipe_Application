@@ -18,7 +18,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Fetch a list of Recipe from a WEB API and display it in the UI
 - Leveraged Kotlin Coroutines, StateFlow for API and passing of data back to view
 - Used Jetpack Compose to Populate list of data into the composable UI screen
-- Make UI screen load both vertical and grid of recipe list
+- Make UI screen load horizontal, vertical and grid of recipe list
 - Added search functionality to search based on recipe name in AppBar
 - Enabe User to Add a Recipe to Cart and show SnackBar once added to Cart
 - Enable user to Select/Unselect a Recipe from List
@@ -42,6 +42,16 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 **RECIPE CARDS IN GRID LAYOUT**
 
 ![Screenshot 2024-03-03 at 12 28 15 PM](https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/b809df37-3aba-4fb7-8af1-3aad816492d0)
+
+
+**HOME SCREEN WITH BOTH ROW AND COLUMN**
+
+<img width="323" alt="Screenshot 2024-03-04 at 2 29 01 PM" src="https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/f0d7a15b-61e0-4980-9764-fdfcf39c6d79">
+
+
+https://github.com/sairam1592/Android_Recipe_Application/assets/14980927/8d6e7279-a0ff-4881-9e47-dd969d51d9a0
+
+
 
 
 **LIST POPULATED AS A SIMPLE VERTICAL SCROLL**
