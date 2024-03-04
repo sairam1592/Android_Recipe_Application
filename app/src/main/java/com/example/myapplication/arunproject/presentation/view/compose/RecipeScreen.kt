@@ -56,7 +56,7 @@ import kotlinx.coroutines.launch
  */
 @ExperimentalMaterialApi
 @Composable
-fun RecipeScreenVertical(
+fun RecipeScreen(
     recipeViewModel: RecipeViewModel = viewModel(), isShowAdaptiveGrid: Boolean
 ) {
     val sheetState = rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
@@ -208,7 +208,7 @@ fun RecipeScreenVertical(
                     Text(
                         text = AppConstants.CHOOSE_TEXT,
                         color = colorResource(id = R.color.white),
-                        fontSize = dimensionResource(id = R.dimen.text_size).value.sp,
+                        fontSize = dimensionResource(id = R.dimen.text_size_18).value.sp,
                         fontFamily = MaterialTheme.typography.h6.fontFamily,
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Normal,
                         modifier = Modifier

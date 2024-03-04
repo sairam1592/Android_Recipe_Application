@@ -1,12 +1,16 @@
 package com.example.myapplication.arunproject.presentation.view.compose.recipelist
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,10 +21,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arun.myapplication.R
-import com.example.myapplication.arunproject.common.getCurrentDate
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItem
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemGrid
+import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemHorizontalGrid
 
 /**
  * Show recipe list
@@ -33,6 +37,7 @@ fun RecipeList(
     selectedRecipeId: String,
     onRecipeClick: (String) -> Unit
 ) {
+
     if (isShowGrid) {
         val columns = 2
 
@@ -82,21 +87,59 @@ fun RecipeList(
         }
     } else {
         LazyColumn {
-
             item {
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_10)))
-            }
 
-            item {
-                Text(
-                    text = getCurrentDate(), style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp
-                    ), modifier = Modifier.padding(
-                        start = dimensionResource(id = R.dimen.padding_20),
-                        end = dimensionResource(id = R.dimen.padding_20)
-                    ), color = colorResource(id = R.color.blue_primary)
-                )
+                Column {
+
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
+
+                    Text(
+                        text = "Recipe Row",
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
+                        ),
+                        modifier = Modifier.padding(
+                            start = dimensionResource(id = R.dimen.padding_20),
+                            end = dimensionResource(id = R.dimen.padding_20)
+                        ),
+                        color = colorResource(id = R.color.blue_primary)
+                    )
+
+                    Box(modifier = Modifier.height(150.dp)) {
+                        LazyRow(
+                            contentPadding = PaddingValues(
+                                start = dimensionResource(id = R.dimen.padding_16),
+                                top = dimensionResource(id = R.dimen.padding_12)
+                            ),
+                        ) {
+
+                            itemsIndexed(recipes) { index, recipe ->
+                                RecipeItemHorizontalGrid(
+                                    recipe = recipe,
+                                    onClick = { recipeId -> onRecipeClick(recipeId) },
+                                    isSelected = recipe.id == selectedRecipeId,
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_16)))
+
+                    Text(
+                        text = "Recipe Vertical List",
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
+                        ),
+                        modifier = Modifier.padding(
+                            start = dimensionResource(id = R.dimen.padding_20),
+                            end = dimensionResource(id = R.dimen.padding_20)
+                        ),
+                        color = colorResource(id = R.color.blue_primary)
+                    )
+
+                }
             }
 
             items(recipes.size) { index ->

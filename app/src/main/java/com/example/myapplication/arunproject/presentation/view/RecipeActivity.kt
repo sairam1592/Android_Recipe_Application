@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.ExperimentalComposeUiApi
-import com.example.myapplication.arunproject.presentation.view.compose.RecipeScreenVertical
+import com.example.myapplication.arunproject.presentation.view.compose.RecipeScreen
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,7 +22,7 @@ class RecipeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            RecipeScreenVertical(recipeViewModel = viewModel, isShowAdaptiveGrid = false)
+            RecipeScreen(recipeViewModel = viewModel, isShowAdaptiveGrid = false)
         }
     }
 }

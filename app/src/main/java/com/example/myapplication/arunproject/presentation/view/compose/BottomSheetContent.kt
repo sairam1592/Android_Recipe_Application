@@ -26,7 +26,7 @@ fun BottomSheetContent() {
                 text = AppConstants.MY_INTRO,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = dimensionResource(id = R.dimen.text_size).value.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_22).value.sp,
                 ),
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.padding_16),
