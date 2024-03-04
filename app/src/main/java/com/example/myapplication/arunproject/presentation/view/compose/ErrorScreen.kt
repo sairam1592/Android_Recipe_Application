@@ -46,7 +46,7 @@ fun ErrorScreen(onRetry: () -> Unit) {
             Text(
                 AppConstants.NO_INTERNET_ERROR_MESSAGE,
                 color = colorResource(id = R.color.blue_primary),
-                fontSize = dimensionResource(id = R.dimen.text_size_large).value.sp,
+                fontSize = dimensionResource(id = R.dimen.text_size_22).value.sp,
                 fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )

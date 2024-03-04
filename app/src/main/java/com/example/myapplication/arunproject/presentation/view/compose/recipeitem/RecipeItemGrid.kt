@@ -34,7 +34,7 @@ fun RecipeItemGrid(recipe: Recipe, onClick: (String) -> Unit, isSelected: Boolea
         Card(
             colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.blue_light)),
             border = if (isSelected) BorderStroke(
-                dimensionResource(id = R.dimen.padding_8),
+                dimensionResource(id = R.dimen.padding_5),
                 colorResource(id = R.color.blue_primary)
             ) else null,
             elevation = CardDefaults.cardElevation(),
