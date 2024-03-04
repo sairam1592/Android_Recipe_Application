@@ -90,7 +90,11 @@ fun RecipeScreen(
                 },
                 isSearchVisible = isSearchVisible,
                 onSearchClicked = { isSearchVisible = true },
-                onSearchClose = { isSearchVisible = false })
+                onSearchClose = {
+                    isSearchVisible = false
+                    searchQuery.value = ""
+                    recipeViewModel.searchRecipe("")
+                })
         }, snackbarHost = {
             SnackbarHost(it) { data ->
                 ShowOnClickSnackBarWithoutAction(data.message)
@@ -133,7 +137,8 @@ fun RecipeScreen(
                                 onRecipeClick = { newRecipeId ->
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected( selectedIdFromState = selectedRecipeId,
+                                    recipeViewModel.onRecipeSelected(
+                                        selectedIdFromState = selectedRecipeId,
                                         newRecipeId
                                     )
 
@@ -147,7 +152,8 @@ fun RecipeScreen(
                                 onRecipeClick = { newRecipeId ->
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected(selectedIdFromState =  selectedRecipeId,
+                                    recipeViewModel.onRecipeSelected(
+                                        selectedIdFromState = selectedRecipeId,
                                         newRecipeId
                                     )
                                 }, selectedRecipeId = selectedRecipeId.toString()
