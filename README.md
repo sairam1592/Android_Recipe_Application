@@ -28,6 +28,8 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 
 ## Upcoming Additions:
 - Publishing to Google Play store -> Submitted release bundle for Review
+- Host Recipe detail screen info in Firebase Firestore DB and fetch the same into the app
+- Implement Open AI API 3.5gpt to best suggest cooking tips/help to user (Limit to 3 questions per user) 
 - A lot of Jetpack design implementation
 - Room DB for caching
 - More features such as Recipe Detail screen, Difficulty level of recipe, Refer to youtube link, Select/Unselect a Recipe, Multiple Select/Unselect just like in other food apps
