@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.arun.myrecipeapplication" />
+                  <option name="mobileSdkAppId" value="1:378890299117:android:5c4b06434c2931077d0ee4" />
+                  <option name="projectId" value="recipe-realm-f32dc" />
+                  <option name="projectNumber" value="378890299117" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

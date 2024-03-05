@@ -5,6 +5,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -90,6 +91,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-placeholder-material:0.32.0")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    //firebase
+    implementation ("com.google.firebase:firebase-firestore:24.10.3")
+    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
+    implementation("com.google.firebase:firebase-analytics")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
