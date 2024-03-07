@@ -51,9 +51,6 @@ import com.example.myapplication.arunproject.presentation.view.state.RecipeViewS
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
 import kotlinx.coroutines.launch
 
-/**
- * RecipeScreenVertical is used to show the recipe list in vertical list
- */
 @ExperimentalMaterialApi
 @Composable
 fun RecipeScreen(
@@ -67,22 +64,16 @@ fun RecipeScreen(
     val searchQuery = rememberSaveable { mutableStateOf("") }
     var isSearchVisible by remember { mutableStateOf(false) }
 
-    ModalBottomSheetLayout(
-        sheetState = sheetState,
-        sheetShape = RoundedCornerShape(
-            topStart = dimensionResource(id = R.dimen.padding_16),
-            topEnd = dimensionResource(id = R.dimen.padding_16)
-        ),
-        sheetBackgroundColor = colorResource(id = R.color.blue_light),
-        sheetContent = {
-            BottomSheetContent()
-        }
-    ) {
+    ModalBottomSheetLayout(sheetState = sheetState, sheetShape = RoundedCornerShape(
+        topStart = dimensionResource(id = R.dimen.padding_16),
+        topEnd = dimensionResource(id = R.dimen.padding_16)
+    ), sheetBackgroundColor = colorResource(id = R.color.blue_light), sheetContent = {
+        BottomSheetContent()
+    }) {
         Scaffold(scaffoldState = scaffoldState, topBar = {
-            RecipeAppBar(
-                onMenuItemClick = { isShowGridList ->
-                    recipeViewModel.showGridList(isShowGridList)
-                },
+            RecipeAppBar(onMenuItemClick = { isShowGridList ->
+                recipeViewModel.showGridList(isShowGridList)
+            },
                 searchQuery = searchQuery,
                 onSearchTextChange = {
                     searchQuery.value = it
@@ -121,8 +112,7 @@ fun RecipeScreen(
                         selectedRecipeName?.let { name ->
                             LaunchedEffect(name) {
                                 scaffoldState.snackbarHostState.showSnackbar(
-                                    message = name,
-                                    duration = SnackbarDuration.Short
+                                    message = name, duration = SnackbarDuration.Short
                                 )
                             }
                         }
@@ -138,11 +128,11 @@ fun RecipeScreen(
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
                                     recipeViewModel.onRecipeSelected(
-                                        selectedIdFromState = selectedRecipeId,
-                                        newRecipeId
+                                        selectedIdFromState = selectedRecipeId, newRecipeId
                                     )
 
-                                }, selectedRecipeId = selectedRecipeId.toString()
+                                },
+                                selectedRecipeId = selectedRecipeId.toString()
                             )
                         } else {
                             RecipeList(
@@ -153,10 +143,10 @@ fun RecipeScreen(
                                     recipeViewModel.clearSelectedRecipeId()
                                     recipeViewModel.clearCart()
                                     recipeViewModel.onRecipeSelected(
-                                        selectedIdFromState = selectedRecipeId,
-                                        newRecipeId
+                                        selectedIdFromState = selectedRecipeId, newRecipeId
                                     )
-                                }, selectedRecipeId = selectedRecipeId.toString()
+                                },
+                                selectedRecipeId = selectedRecipeId.toString()
                             )
                         }
                     }
@@ -179,8 +169,7 @@ fun RecipeScreen(
                 }
             }
         }, floatingActionButton = {
-            FloatingActionButton(
-                backgroundColor = colorResource(id = R.color.blue_primary),
+            FloatingActionButton(backgroundColor = colorResource(id = R.color.blue_primary),
                 onClick = {
                     coroutineScope.launch {
                         if (sheetState.isVisible) {
@@ -217,11 +206,10 @@ fun RecipeScreen(
                         fontSize = dimensionResource(id = R.dimen.text_size_18).value.sp,
                         fontFamily = MaterialTheme.typography.h6.fontFamily,
                         fontWeight = androidx.compose.ui.text.font.FontWeight.Normal,
-                        modifier = Modifier
-                            .padding(
-                                start = dimensionResource(id = R.dimen.padding_16),
-                                end = dimensionResource(id = R.dimen.padding_5)
-                            )
+                        modifier = Modifier.padding(
+                            start = dimensionResource(id = R.dimen.padding_16),
+                            end = dimensionResource(id = R.dimen.padding_5)
+                        )
                     )
 
                     Spacer(modifier = Modifier.weight(1f))
@@ -275,6 +263,7 @@ fun PreviewRecipeList() {
         recipes = dummyRecipes,
         isShowGrid = false,
         isShowGridAdaptive = false,
-        onRecipeClick = {}, selectedRecipeId = ""
+        onRecipeClick = {},
+        selectedRecipeId = ""
     )
 }

@@ -2,10 +2,10 @@ package com.example.myapplication.arunproject.data.repository
 
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.domain.model.DataResult
+import kotlinx.coroutines.flow.Flow
 
-/**
- * This is a repository interface that provides access to recipes.
- */
 interface RecipeRepository {
-    suspend fun getRecipes(): DataResult<List<Recipe>>
+    suspend fun getRecipes(): Flow<DataResult<List<Recipe>>>
+
+    suspend fun getRecipeById(recipeId: String): Flow<Recipe?>
 }

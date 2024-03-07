@@ -21,9 +21,6 @@ import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 import com.example.myapplication.arunproject.common.AppConstants.RETRY
 
-/**
- * Show error screen
- */
 @Composable
 fun ErrorScreen(onRetry: () -> Unit) {
     Box(

@@ -17,10 +17,6 @@ import androidx.compose.ui.res.dimensionResource
 import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 
-/**
- * ShowErrorSnackBarWithoutAction is used to show the error Snack bar without any action
- */
-
 @Composable
 fun ShowOnClickSnackBarWithoutAction(recipeName: String) {
     val snackState = remember { SnackbarHostState() }

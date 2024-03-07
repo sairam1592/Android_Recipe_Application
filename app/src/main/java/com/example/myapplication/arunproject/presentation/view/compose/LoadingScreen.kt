@@ -11,9 +11,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import com.arun.myrecipeapplication.R
 
-/**
- * Show loading screen
- */
 @Composable
 fun LoadingScreen() {
     Box(
