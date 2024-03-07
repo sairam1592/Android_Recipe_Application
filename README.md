@@ -28,7 +28,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 
 ## Upcoming Additions:
 - Publishing to Google Play store -> Submitted release bundle for Review
-- Host Recipe detail screen info in Firebase Firestore DB and fetch the same into the app -> Firestore integrate, now designing data models
+- Host A set of questions in Firebase Firestore DB and fetch the same into the app (Done, working on UI)
 - Implement Open AI API 3.5gpt to best suggest cooking tips/help to user (Limit to 3 questions per user) -> This weekend ;)
 - A lot of Jetpack design implementation
 - Room DB for caching
