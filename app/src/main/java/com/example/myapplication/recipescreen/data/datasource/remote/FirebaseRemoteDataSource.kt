@@ -1,5 +1,5 @@
 package com.example.myapplication.recipescreen.data.datasource.remote
 
 interface FirebaseRemoteDataSource {
-    suspend fun getRecipeDetails(recipeId: String): String?
+    suspend fun getRecipeDetails(recipeId: String): List<String>
 }

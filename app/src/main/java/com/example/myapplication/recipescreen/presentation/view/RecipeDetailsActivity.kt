@@ -17,20 +17,28 @@ class RecipeDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val recipeId = intent.getStringExtra(EXTRA_RECIPE_ID)
+
+        recipeId?.let { viewModel.getRecipeDetails(it) }
+
         lifecycleScope.launch {
-            viewModel.recipeDetails.collect { result ->
-                //TODO FOR NOW THE RESULT IS RETRIEVED
+            viewModel.recipeDetails.collect { result -> //Returns a list of questions to be displayed
                 //TODO HANDLE ERROR CASE
-                //TODO POPULATE DUMMY DATA IN FIREBASE
-                //FETCH AND SHOW IN COMPOSE SCREEN
+                //TODO FETCH normal details from DB AND SHOW IN COMPOSE SCREEN
             }
         }
     }
 
     companion object {
+
+        const val EXTRA_RECIPE_ID = "extra_recipe_id"
+
         //TODO Remove this usage and use Compose Navigator
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, RecipeDetailsActivity::class.java))
+        fun startActivity(context: Context, recipeId: String) {
+            val intent = Intent(context, RecipeDetailsActivity::class.java).apply {
+                putExtra(EXTRA_RECIPE_ID, recipeId)
+            }
+            context.startActivity(intent)
         }
     }
 }

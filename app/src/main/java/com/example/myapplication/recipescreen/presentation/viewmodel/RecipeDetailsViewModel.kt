@@ -2,7 +2,6 @@ package com.example.myapplication.recipescreen.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.myapplication.recipescreen.common.RecipeScreenConstants
 import com.example.myapplication.recipescreen.domain.usecase.GetRecipeDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,14 +15,10 @@ class RecipeDetailsViewModel @Inject constructor(
     private val getRecipeDetailUseCase: GetRecipeDetailUseCase
 ) : ViewModel() {
 
-    private val _recipeDetails = MutableStateFlow<String?>("")
-    val recipeDetails: StateFlow<String?> = _recipeDetails.asStateFlow()
+    private val _recipeDetails = MutableStateFlow<List<String>>(emptyList())
+    val recipeDetails: StateFlow<List<String>> = _recipeDetails.asStateFlow()
 
-    init {
-        getRecipeDetails(RecipeScreenConstants.TEST_RECIPE_ID)
-    }
-
-    private fun getRecipeDetails(recipeId: String) {
+    fun getRecipeDetails(recipeId: String) {
         viewModelScope.launch {
             getRecipeDetailUseCase(recipeId).collect { result ->
                 _recipeDetails.value = result

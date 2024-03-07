@@ -15,17 +15,18 @@ class FirebaseRemoteDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) : FirebaseRemoteDataSource {
 
-    override suspend fun getRecipeDetails(recipeId: String): String? {
+    override suspend fun getRecipeDetails(recipeId: String): List<String> {
 
         return suspendCoroutine { continuation ->
             fireStore.collection(FIREBASE_COLLECTION_NAME)
                 .document(recipeId)
                 .get()
                 .addOnSuccessListener { document ->
-                    continuation.resume(document.data?.values?.firstOrNull() as String?)
+                    continuation.resume(document.data?.values?.mapNotNull { it as? String }
+                        ?: emptyList())
                 }
                 .addOnFailureListener {
-                    continuation.resume(it.message)
+                    continuation.resume(emptyList())
                 }
         }
     }
