@@ -30,7 +30,7 @@ fun ErrorScreen(onRetry: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(dimensionResource(id = R.dimen.padding_20)),
-        contentAlignment = Alignment.CenterStart
+        contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 

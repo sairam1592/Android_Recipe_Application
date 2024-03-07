@@ -11,16 +11,15 @@ import javax.inject.Inject
  */
 class RecipeRemoteDataSourceImpl @Inject constructor(private val recipeService: RecipeService) :
     RecipeRemoteDataSource {
-    override suspend fun getRecipes(): DataResult<List<Recipe>> {
-        return try {
-            val response = recipeService.getRecipes()
-            if (response.isSuccessful) {
-                DataResult.Success(response.body() ?: emptyList())
-            } else {
-                DataResult.Error(Exception(ERROR_API_FAILED))
-            }
-        } catch (e: Exception) {
-            DataResult.Error(e)
+
+    override suspend fun getRecipes(): DataResult<List<Recipe>> = try {
+        val response = recipeService.getRecipes()
+        if (response.isSuccessful) {
+            DataResult.Success(response.body() ?: emptyList())
+        } else {
+            DataResult.Error(Exception(ERROR_API_FAILED))
         }
+    } catch (e: Exception) {
+        DataResult.Error(e)
     }
 }
