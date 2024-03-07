@@ -14,13 +14,13 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - **Kotlin Coroutines & Flow**: For asynchronous tasks and real-time data updates, Kotlin Coroutines and Flow are employed effectively.
 - **State Management**: Reactive state management is implemented, ensuring that the UI is always in sync with the underlying data.
 
-## Functionality
+## Functionality (ALL UI BUILD USING JETPACK COMPOSE)
 - Fetch a list of Recipe from a WEB API and display it in the UI
-- Leveraged Kotlin Coroutines, StateFlow for API and passing of data back to view
+- Leveraged use of Kotlin Coroutines, StateFlow for passing of data back to View
 - Used Jetpack Compose to Populate list of data into the composable UI screen
 - Make UI screen load horizontal, vertical and grid of recipe list
 - Added search functionality to search based on recipe name in AppBar
-- Enabe User to Add a Recipe to Cart and show SnackBar once added to Cart
+- Enable User to Add a Recipe to Cart and show SnackBar once added to Cart
 - Enable user to Select/Unselect a Recipe from List
 - Added Floating Action Button and onClick of it open a BottomSheet with my Intro;)
 - Show error Snackbar if App is opened when no internet available
@@ -28,8 +28,8 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 
 ## Upcoming Additions:
 - Publishing to Google Play store -> Submitted release bundle for Review
-- Host Recipe detail screen info in Firebase Firestore DB and fetch the same into the app
-- Implement Open AI API 3.5gpt to best suggest cooking tips/help to user (Limit to 3 questions per user) 
+- Host Recipe detail screen info in Firebase Firestore DB and fetch the same into the app -> Firestore integrate, now designing data models
+- Implement Open AI API 3.5gpt to best suggest cooking tips/help to user (Limit to 3 questions per user) -> This weekend ;)
 - A lot of Jetpack design implementation
 - Room DB for caching
 - More features such as Recipe Detail screen, Difficulty level of recipe, Refer to youtube link, Select/Unselect a Recipe, Multiple Select/Unselect just like in other food apps
