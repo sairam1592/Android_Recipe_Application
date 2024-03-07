@@ -7,3 +7,7 @@ import java.util.Locale
 
 fun getCurrentDate(): String =
     SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(Date())
+
+fun <T> T?.throwExceptionIfNull(message: String = ""): T {
+    return this ?: throw java.lang.NullPointerException(message)
+}

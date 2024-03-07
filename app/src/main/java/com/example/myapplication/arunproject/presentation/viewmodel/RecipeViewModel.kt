@@ -1,11 +1,14 @@
 package com.example.myapplication.arunproject.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.arunproject.common.AppConstants.NO_INTERNET_ERROR_MESSAGE
 import com.example.myapplication.arunproject.domain.model.DataResult
+import com.example.myapplication.arunproject.domain.usecase.GetRecipeByIdUseCase
 import com.example.myapplication.arunproject.domain.usecase.GetRecipesUseCase
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
+import com.example.myapplication.recipescreen.presentation.view.state.RecipeDetailUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,18 +17,18 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * This is a view model that provides access to recipes.
- * @param getRecipesUseCase The use case that provides a list of recipes.
- */
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase,
+    private val getRecipeByIdUseCase: GetRecipeByIdUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _recipeState = MutableStateFlow<RecipeViewState>(RecipeViewState.Loading)
     val recipeState: StateFlow<RecipeViewState> = _recipeState.asStateFlow()
+
+    private val _recipeDetailState = MutableStateFlow(RecipeDetailUIState())
+    val recipeDetailState = _recipeDetailState.asStateFlow()
 
     init {
         loadRecipes()
@@ -37,21 +40,23 @@ class RecipeViewModel @Inject constructor(
     fun loadRecipes() {
         viewModelScope.launch(ioDispatcher) {
             _recipeState.value = RecipeViewState.Loading
-            val result = runCatching { getRecipesUseCase() }
-            result.onSuccess { dataResult ->
+            getRecipesUseCase().collect { dataResult ->
                 when (dataResult) {
                     is DataResult.Success -> _recipeState.value =
                         RecipeViewState.Success(dataResult.data)
 
-                    is DataResult.Error -> _recipeState.value =
-                        RecipeViewState.Error(
-                            dataResult.exception.message ?: NO_INTERNET_ERROR_MESSAGE
-                        )
+                    is DataResult.Error -> _recipeState.value = RecipeViewState.Error(
+                        dataResult.exception.message ?: NO_INTERNET_ERROR_MESSAGE
+                    )
                 }
             }
-            result.onFailure { error ->
-                _recipeState.value =
-                    RecipeViewState.Error(error.message ?: NO_INTERNET_ERROR_MESSAGE)
+        }
+    }
+
+    fun getRecipeById(recipeId: String) {
+        viewModelScope.launch {
+            getRecipeByIdUseCase(recipeId).collect { result ->
+                _recipeDetailState.value = _recipeDetailState.value.copy(recipeDetail = result)
             }
         }
     }

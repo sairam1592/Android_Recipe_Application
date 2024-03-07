@@ -27,9 +27,6 @@ import com.example.myapplication.arunproject.presentation.view.compose.recipeite
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemGrid
 import com.example.myapplication.arunproject.presentation.view.compose.recipeitem.RecipeItemHorizontalGrid
 
-/**
- * Show recipe list
- */
 @Composable
 fun RecipeList(
     recipes: List<Recipe>,

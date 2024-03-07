@@ -42,9 +42,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.arun.myrecipeapplication.R
 
-/**
- * RecipeAppBar is used to show the app bar with menu
- */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RecipeAppBar(

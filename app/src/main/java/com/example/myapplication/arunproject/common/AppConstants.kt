@@ -18,6 +18,9 @@ object AppConstants {
     const val RECIPE_ROW = "Recipe Row"
     const val RECIPE_COLUMN = "Recipe Column"
 
+    const val DB_NAME = "my_recipe_database.db"
+    const val TABLE_NAME = "recipes"
+
     const val MY_INTRO =
         "Welcome to Recipe Realm Android app. This recipe app is built using" +
                 " Kotlin, Jetpack Compose, Kotlin Coroutines, Hilt, Retrofit etc." +

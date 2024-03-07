@@ -22,7 +22,7 @@ class RecipeDetailsActivity : AppCompatActivity() {
         recipeId?.let { viewModel.getRecipeDetails(it) }
 
         lifecycleScope.launch {
-            viewModel.recipeDetails.collect { result -> //Returns a list of questions to be displayed
+            viewModel.recipeDetails.collect { result -> //Returns a list of questions to be displayed from firebase firestore
                 //TODO HANDLE ERROR CASE
                 //TODO FETCH normal details from DB AND SHOW IN COMPOSE SCREEN
             }
