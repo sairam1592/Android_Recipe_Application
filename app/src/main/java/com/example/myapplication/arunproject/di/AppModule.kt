@@ -8,6 +8,11 @@ import com.example.myapplication.arunproject.data.repository.RecipeRepository
 import com.example.myapplication.arunproject.data.repository.RecipeRepositoryImpl
 import com.example.myapplication.arunproject.domain.usecase.GetRecipesUseCase
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
+import com.example.myapplication.recipescreen.data.datasource.remote.FirebaseRemoteDataSource
+import com.example.myapplication.recipescreen.data.datasource.remote.FirebaseRemoteDataSourceImpl
+import com.example.myapplication.recipescreen.data.repository.RecipeDetailsRepository
+import com.example.myapplication.recipescreen.data.repository.RecipeDetailsRepositoryImpl
+import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +29,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Singleton
+    @Provides
+    fun provideFirebaseFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Provides
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
@@ -63,5 +72,17 @@ class AppModule {
         ioDispatcher: CoroutineDispatcher
     ): RecipeViewModel {
         return RecipeViewModel(getRecipesUseCase, ioDispatcher)
+    }
+
+
+    @Provides
+    fun provideRecipeDetailsRepository(firebaseRemoteDataSourceImpl: FirebaseRemoteDataSourceImpl): RecipeDetailsRepository {
+        return RecipeDetailsRepositoryImpl(firebaseRemoteDataSourceImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseRemoteDataSource(database: FirebaseFirestore): FirebaseRemoteDataSource {
+        return FirebaseRemoteDataSourceImpl(database)
     }
 }

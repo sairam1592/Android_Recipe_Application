@@ -1,19 +1,5 @@
 package com.example.myapplication.arunproject.data.model
 
-/* Recipe model
-    * @param calories: String
-    * @param carbos: String
-    * @param description: String
-    * @param difficulty: Int
-    * @param fats: String
-    * @param headline: String
-    * @param id: String
-    * @param image: String
-    * @param name: String
-    * @param proteins: String
-    * @param thumb: String
-    * @param time: String
- */
 data class Recipe(
     val calories: String,
     val carbos: String,
