@@ -112,12 +112,12 @@ The project is built with the latest tools and libraries in the Android ecosyste
 
 - **Kotlin**: The whole application is written in Kotlin for its conciseness and reliability.
 - **Jetpack Compose**: Leveraged for building native UI, showcasing my UI developmental skills.
+- **Kotlin Coroutines**: To handle asynchronous tasks and provide a smooth user experience.
 - **Retrofit**: For networking, making API requests and handling responses.
 - **Hilt**: For dependency injection, simplifying the architecture and making testing easier.
-- **Lottie**: To add rich animations that enhance the user experience.
-- **Coil**: Used for image loading, making use of Kotlin's Coroutines for efficiency.
+- **Room**: For persistence of Recipe and offline laoding.
+- **Coil**: For image loading, making use of Kotlin's Coroutines for efficiency.
 - **AndroidX & Material Components**: For the latest UI components that adhere to Material Design principles.
-- **Coroutines**: To handle asynchronous tasks and provide a smooth user experience.
 
 
 ## Building the Project
