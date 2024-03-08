@@ -3,12 +3,15 @@ package com.example.myapplication.arunproject.data.repository
 import com.example.myapplication.arunproject.data.datasource.local.RecipeLocalDataSource
 import com.example.myapplication.arunproject.data.datasource.remote.RecipeRemoteDataSource
 import com.example.myapplication.arunproject.data.model.Recipe
-import com.example.myapplication.arunproject.domain.model.DataResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -17,32 +20,20 @@ class RecipeRepositoryImpl @Inject constructor(
     private val recipeLocalDataSource: RecipeLocalDataSource
 ) :
     RecipeRepository {
-    override suspend fun getRecipes(): Flow<DataResult<List<Recipe>>> = flow {
-        try {
-            val localRecipes = withContext(Dispatchers.IO) {
-                recipeLocalDataSource.getRecipes().first()
-            }
-            if (localRecipes.isNotEmpty()) {
-                emit(DataResult.Success(localRecipes))
-            } else {
-                val remoteRecipesResult = withContext(Dispatchers.IO) {
-                    recipeRemoteDataSource.getRecipes()
-                }
-                when (remoteRecipesResult) {
-                    is DataResult.Success -> {
-                        recipeLocalDataSource.saveRecipes(remoteRecipesResult.data)
-                        emit(DataResult.Success(remoteRecipesResult.data))
-                    }
+    override suspend fun getRecipes(): Flow<List<Recipe>> = flow {
+        emitAll(recipeLocalDataSource.getRecipes().take(1).filter { it.isNotEmpty() })
 
-                    is DataResult.Error -> {
-                        emit(remoteRecipesResult)
-                    }
-                }
+        val localRecipes = recipeLocalDataSource.getRecipes().firstOrNull()
+        if (localRecipes.isNullOrEmpty()) {
+            try {
+                val remoteRecipes = recipeRemoteDataSource.getRecipes().getOrThrow()
+                recipeLocalDataSource.saveRecipes(remoteRecipes)
+                emit(remoteRecipes)
+            } catch (e: Exception) {
+                emit(emptyList())
             }
-        } catch (e: Exception) {
-            emit(DataResult.Error(e))
         }
-    }.flowOn(Dispatchers.Default)
+    }.flowOn(Dispatchers.IO)
 
     override suspend fun getRecipeById(recipeId: String): Flow<Recipe?> = flow {
         val localRecipe = recipeLocalDataSource.getRecipeById(recipeId).first()

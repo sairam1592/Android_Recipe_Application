@@ -95,7 +95,7 @@ fun RecipeList(
                         text = AppConstants.RECIPE_ROW,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
+                            fontSize = dimensionResource(id = R.dimen.text_size_22).value.sp
                         ),
                         modifier = Modifier.padding(
                             start = dimensionResource(id = R.dimen.padding_20),
@@ -128,7 +128,7 @@ fun RecipeList(
                         text = AppConstants.RECIPE_COLUMN,
                         style = MaterialTheme.typography.headlineMedium.copy(
                             fontWeight = FontWeight.Bold,
-                            fontSize = dimensionResource(id = R.dimen.text_size_24).value.sp
+                            fontSize = dimensionResource(id = R.dimen.text_size_22).value.sp
                         ),
                         modifier = Modifier.padding(
                             start = dimensionResource(id = R.dimen.padding_20),
