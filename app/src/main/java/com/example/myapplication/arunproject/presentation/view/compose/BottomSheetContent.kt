@@ -26,14 +26,14 @@ fun BottomSheetContent() {
                 text = AppConstants.MY_INTRO,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = dimensionResource(id = R.dimen.text_size_22).value.sp,
+                    fontSize = dimensionResource(id = R.dimen.text_size_18).value.sp,
                 ),
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.padding_16),
                     end = dimensionResource(id = R.dimen.padding_16),
                     top = dimensionResource(id = R.dimen.padding_2),
                 ),
-                color = colorResource(id = R.color.black),
+                color = colorResource(id = R.color.purple_700),
             )
         }
     }

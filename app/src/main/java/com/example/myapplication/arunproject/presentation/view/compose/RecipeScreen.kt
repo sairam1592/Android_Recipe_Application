@@ -47,7 +47,6 @@ import com.arun.myrecipeapplication.R
 import com.example.myapplication.arunproject.common.AppConstants
 import com.example.myapplication.arunproject.data.model.Recipe
 import com.example.myapplication.arunproject.presentation.view.compose.recipelist.RecipeList
-import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
 import com.example.myapplication.arunproject.presentation.viewmodel.RecipeViewModel
 import kotlinx.coroutines.launch
 
@@ -92,79 +91,77 @@ fun RecipeScreen(
             }
         }, content = {
             Box(modifier = Modifier.padding(it)) {
-                when (recipesState) {
-                    is RecipeViewState.Loading -> {
-                        LoadingScreen()
+                if (recipesState.isLoading) {
+                    LoadingScreen()
+                } else if (recipesState.errorMessage.isNotEmpty()) {
+                    ErrorScreen(onRetry = { recipeViewModel.loadRecipes() })
+
+                    Column {
+                        Row(
+                            modifier = Modifier.weight(1f, fill = true),
+                            verticalAlignment = Alignment.Bottom
+                        ) {
+                            ShowErrorSnackBarWithoutAction()
+                        }
+                    }
+                } else {
+                    val isShowGrid = recipesState.isShowGrid
+                    val searchText = recipesState.searchQuery
+                    val selectedRecipeId = recipesState.selectedRecipeId
+                    val recipes = if (searchText.isNotEmpty()) {
+                        recipesState.recipes.filter {
+                            it.name.contains(
+                                searchText,
+                                ignoreCase = true
+                            )
+                        }
+                    } else {
+                        recipesState.recipes
                     }
 
-                    is RecipeViewState.Success -> {
-                        val recipes = (recipesState as RecipeViewState.Success).recipes
-                        val isShowGrid = (recipesState as RecipeViewState.Success).isShowGrid
-                        val searchText = (recipesState as RecipeViewState.Success).searchQuery
-
-                        val selectedRecipeId =
-                            (recipesState as RecipeViewState.Success).selectedRecipeId
-
-                        val recipeCart = (recipesState as RecipeViewState.Success).cart
+                    recipesState.cart.firstOrNull()?.let { cartItemId ->
                         val selectedRecipeName =
-                            (recipesState as RecipeViewState.Success).recipes.firstOrNull { it.id == recipeCart.firstOrNull() }?.name
-
+                            recipesState.recipes.firstOrNull { it.id == cartItemId }?.name
                         selectedRecipeName?.let { name ->
                             LaunchedEffect(name) {
                                 scaffoldState.snackbarHostState.showSnackbar(
-                                    message = name, duration = SnackbarDuration.Short
+                                    message = name,
+                                    duration = SnackbarDuration.Short
                                 )
                             }
                         }
-
-                        if (searchText.isNotEmpty()) {
-                            val filteredRecipes =
-                                recipes.filter { it.name.contains(searchText, ignoreCase = true) }
-                            RecipeList(
-                                filteredRecipes,
-                                isShowGrid = isShowGrid,
-                                isShowAdaptiveGrid,
-                                onRecipeClick = { newRecipeId ->
-                                    recipeViewModel.clearSelectedRecipeId()
-                                    recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected(
-                                        selectedIdFromState = selectedRecipeId, newRecipeId
-                                    )
-
-                                },
-                                selectedRecipeId = selectedRecipeId.toString()
-                            )
-                        } else {
-                            RecipeList(
-                                recipes,
-                                isShowGrid = isShowGrid,
-                                isShowAdaptiveGrid,
-                                onRecipeClick = { newRecipeId ->
-                                    recipeViewModel.clearSelectedRecipeId()
-                                    recipeViewModel.clearCart()
-                                    recipeViewModel.onRecipeSelected(
-                                        selectedIdFromState = selectedRecipeId, newRecipeId
-                                    )
-                                },
-                                selectedRecipeId = selectedRecipeId.toString()
-                            )
-                        }
                     }
 
-                    is RecipeViewState.Error -> {
-                        val errorMessage = (recipesState as RecipeViewState.Error).message
-                        ErrorScreen(onRetry = {
-                            recipeViewModel.loadRecipes()
-                        })
-
-                        Column {
-                            Row(
-                                modifier = Modifier.weight(1f, fill = true),
-                                verticalAlignment = Alignment.Bottom
-                            ) {
-                                ShowErrorSnackBarWithoutAction()
-                            }
-                        }
+                    if (searchText.isNotEmpty()) {
+                        val filteredRecipes =
+                            recipes.filter { it.name.contains(searchText, ignoreCase = true) }
+                        RecipeList(
+                            filteredRecipes,
+                            isShowGrid = isShowGrid,
+                            isShowAdaptiveGrid,
+                            onRecipeClick = { newRecipeId ->
+                                recipeViewModel.clearSelectedRecipeId()
+                                recipeViewModel.clearCart()
+                                recipeViewModel.onRecipeSelected(
+                                    selectedIdFromState = selectedRecipeId, newRecipeId
+                                )
+                            },
+                            selectedRecipeId = selectedRecipeId.toString()
+                        )
+                    } else {
+                        RecipeList(
+                            recipes,
+                            isShowGrid = isShowGrid,
+                            isShowAdaptiveGrid,
+                            onRecipeClick = { newRecipeId ->
+                                recipeViewModel.clearSelectedRecipeId()
+                                recipeViewModel.clearCart()
+                                recipeViewModel.onRecipeSelected(
+                                    selectedIdFromState = selectedRecipeId, newRecipeId
+                                )
+                            },
+                            selectedRecipeId = selectedRecipeId.toString()
+                        )
                     }
                 }
             }
@@ -216,9 +213,9 @@ fun RecipeScreen(
 
                     Button(
                         onClick = {
-                            (recipesState as RecipeViewState.Success).selectedRecipeId?.let {
+                            (recipesState.selectedRecipeId?.let {
                                 recipeViewModel.addToCart(it)
-                            }
+                            })
                         },
                         shape = RoundedCornerShape(50),
                         modifier = Modifier

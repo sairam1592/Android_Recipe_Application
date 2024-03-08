@@ -6,7 +6,7 @@ object AppConstants {
     //API Constants
     const val BASE_URL = "https://hf-android-app.s3-eu-west-1.amazonaws.com/android-test/"
     const val API_GET_PARAM =
-        "recipes.json" // This is the parameter for the API call, can be modified to test error response
+        "recipes.json"
 
     //Error Messages
     const val NO_INTERNET_ERROR_MESSAGE = "Check your Internet Connection and try again."
@@ -22,9 +22,9 @@ object AppConstants {
     const val TABLE_NAME = "recipes"
 
     const val MY_INTRO =
-        "Welcome to Recipe Realm Android app. This recipe app is built using" +
-                " Kotlin, Jetpack Compose, Kotlin Coroutines, Hilt, Retrofit etc." +
+        "Welcome to Recipe Realm. This app is built entirely using ->" +
+                " Kotlin, Jetpack Compose, Kotlin Coroutines, StateFlow, Hilt, Retrofit, Room etc." +
                 " following the best practices and design patterns such as " +
-                " MVVM, Clean Architecture, SOLID principles." +
-                "\n Check it out, Thanks for visiting."
+                " MVVM, Clean Architecture, Clean Code, SOLID principles.\n" +
+                " Coming Soon: Jetpack Navigation, Firebase FireStore DB and Open-AI API integration, Stay Tuned!!"
 }
