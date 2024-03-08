@@ -19,7 +19,7 @@ This app has been passionately crafted to demonstrate the full spectrum of my de
 - Leveraged use of Kotlin Coroutines, StateFlow for passing of data back to View
 - Used Jetpack Compose to Populate list of data into the composable UI screen
 - Make UI screen load horizontal, vertical and grid of recipe list
-- Add Room Database caching, now the user can view the list in offline mode also
+- Added Room Database caching, now the user can view the list in offline mode also
 - Added search functionality to search based on recipe name in AppBar
 - Enable User to Add a Recipe to Cart and show SnackBar once added to Cart
 - Enable user to Select/Unselect a Recipe from List
