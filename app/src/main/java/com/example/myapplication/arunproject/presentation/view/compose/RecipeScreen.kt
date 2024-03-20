@@ -217,11 +217,15 @@ fun RecipeScreen(
                                 recipeViewModel.addToCart(it)
                             })
                         },
+                        enabled = recipesState.isAddToCartButtonEnabled,
                         shape = RoundedCornerShape(50),
                         modifier = Modifier
                             .wrapContentSize()
                             .padding(dimensionResource(id = R.dimen.padding_4)),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.blue_primary))
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = colorResource(id = R.color.blue_primary),
+                            disabledBackgroundColor = colorResource(id = R.color.cool_grey_500)
+                        )
                     ) {
                         Text(
                             text = AppConstants.ADD_TO_CART,

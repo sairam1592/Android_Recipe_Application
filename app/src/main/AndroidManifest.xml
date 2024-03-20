@@ -15,15 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
         <activity
-            android:name="com.example.myapplication.arunproject.presentation.view.RecipeActivity"
-            android:exported="true">
+            android:name="com.example.myapplication.splashscreen.presentation.view.SplashActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.example.myapplication.arunproject.presentation.view.RecipeActivity"
+            android:exported="true" />
 
         <activity
             android:name="com.example.myapplication.recipescreen.presentation.view.RecipeDetailsActivity"
