@@ -1,6 +1,7 @@
 package com.example.myapplication.arunproject.presentation.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,9 @@ class RecipeActivity : AppCompatActivity() {
         setContent {
             RecipeScreen(
                 recipeViewModel = recipeViewModel,
-                isShowAdaptiveGrid = false
+                isShowAdaptiveGrid = false, viewRecipe = { recipeId ->
+                    //TODO TRIGGER NAVIGATION TO RECIPE DETAILS SCREEN
+                }
             )
         }
     }

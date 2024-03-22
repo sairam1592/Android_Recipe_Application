@@ -60,12 +60,16 @@ class RecipeViewModel @Inject constructor(
     fun onRecipeSelected(selectedIdFromState: String?, recipeId: String) {
         if (selectedIdFromState == recipeId) {
             _recipeState.value =
-                _recipeState.value.copy(selectedRecipeId = null, isAddToCartButtonEnabled = false)
+                _recipeState.value.copy(
+                    selectedRecipeId = null,
+                    isAddToCartButtonEnabled = false,
+                    isViewInfoButtonEnabled = false
+                )
         } else {
             _recipeState.value =
                 _recipeState.value.copy(
                     selectedRecipeId = recipeId,
-                    isAddToCartButtonEnabled = true
+                    isAddToCartButtonEnabled = true, isViewInfoButtonEnabled = true
                 )
         }
     }
@@ -82,7 +86,8 @@ class RecipeViewModel @Inject constructor(
 
     fun clearSelectedRecipeId() {
         _recipeState.value = _recipeState.value.copy(selectedRecipeId = null)
-        _recipeState.value = _recipeState.value.copy(isAddToCartButtonEnabled = true)
+        _recipeState.value =
+            _recipeState.value.copy(isAddToCartButtonEnabled = true, isViewInfoButtonEnabled = true)
     }
 
     fun showGridList(isShowGrid: Boolean) {
