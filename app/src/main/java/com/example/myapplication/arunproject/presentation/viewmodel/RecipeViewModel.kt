@@ -3,10 +3,8 @@ package com.example.myapplication.arunproject.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.arunproject.common.AppConstants.NO_INTERNET_ERROR_MESSAGE
-import com.example.myapplication.arunproject.domain.usecase.GetRecipeByIdUseCase
 import com.example.myapplication.arunproject.domain.usecase.GetRecipesUseCase
 import com.example.myapplication.arunproject.presentation.view.state.RecipeViewState
-import com.example.myapplication.recipescreen.presentation.view.state.RecipeDetailUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,15 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipeViewModel @Inject constructor(
     private val getRecipesUseCase: GetRecipesUseCase,
-    private val getRecipeByIdUseCase: GetRecipeByIdUseCase,
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _recipeState = MutableStateFlow(RecipeViewState())
     val recipeState: StateFlow<RecipeViewState> = _recipeState.asStateFlow()
-
-    private val _recipeDetailState = MutableStateFlow(RecipeDetailUIState())
-    val recipeDetailState = _recipeDetailState.asStateFlow()
 
     init {
         loadRecipes()
@@ -45,14 +39,6 @@ class RecipeViewModel @Inject constructor(
                     errorMessage = NO_INTERNET_ERROR_MESSAGE,
                     isLoading = false
                 )
-            }
-        }
-    }
-
-    fun getRecipeById(recipeId: String) {
-        viewModelScope.launch {
-            getRecipeByIdUseCase(recipeId).collect { result ->
-                _recipeDetailState.value = _recipeDetailState.value.copy(recipeDetail = result)
             }
         }
     }
